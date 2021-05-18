@@ -1,5 +1,5 @@
 /**
- * @author bp
+ * @author sp
  */
 const gulp = require('gulp'),
     babel = require('gulp-babel'),
@@ -13,8 +13,8 @@ const gulp = require('gulp'),
 
 gulp.task('compile:sass', function() {
     del([
-        './target/bp-1.0.0/assets/style/app.css',
-        './target/bp-1.0.0/assets/style/app.css.map'
+        './target/sp-1.0.0/assets/style/app.css',
+        './target/sp-1.0.0/assets/style/app.css.map'
     ]);
     return gulp.src('./src/main/assets/style/**/*.scss')
         .pipe(sourcemaps.init())
@@ -26,7 +26,7 @@ gulp.task('compile:sass', function() {
             grid: 'autoplace'
         }))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('./target/bp-1.0.0/assets/style'))
+        .pipe(gulp.dest('./target/sp-1.0.0/assets/style'))
 });
 
 /* sass watcher task */

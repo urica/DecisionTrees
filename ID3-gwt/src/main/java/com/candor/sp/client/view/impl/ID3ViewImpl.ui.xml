@@ -1,0 +1,42 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	input[type="text"] {
+		width: 100%;
+		font-family: sans-serif;
+		font-size: 20px;
+		border-radius: 6px;
+		padding: 14px;
+		border: solid 1px #dcdcdc;
+		transition: box-shadow 0.3s, border 0.3s;
+	}
+
+	input[type="text"]:focus, input[type="text"].focus {
+		border: solid 1px #cbcbcb;
+		box-shadow: 0 0 5px 1px #969696;
+	}
+
+	.box {
+		margin: 100px auto 0px;
+		width: 400px;
+	}
+
+	.list {
+		margin: 0px auto;
+		width: 400px;
+		cursor: pointer;
+		font-size: 18px;
+		color: #333;
+	}
+		.tree-overflow {
+		overflow:auto;
+		}
+	</ui:style>
+	<g:HTMLPanel >
+<!--		<div class="{style.box}">-->
+<!--			<g:TextBox ui:field="searchBox"></g:TextBox>-->
+<!--		</div>-->
+		<div class="idf-tree-item {style.tree-overflow}" ui:field="treeElement"></div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

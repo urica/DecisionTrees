@@ -1,5 +1,5 @@
 #!/bin/bash
-# @author bp
+# @author sp
 
 set -e
 

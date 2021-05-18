@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.candor</groupId>
-    <artifactId>bp</artifactId>
+    <artifactId>sp</artifactId>
     <packaging>war</packaging>
     <version>1.0.0</version>
     <name>ID3™</name>
@@ -167,7 +167,7 @@
                     <runTarget>/id3.html</runTarget>
 
                     <modules>
-                        <module>com.candor.bp.ID3</module>
+                        <module>com.candor.sp.ID3</module>
                     </modules>
 
                     <port>2021</port>
@@ -176,8 +176,8 @@
 
                     <logLevel>INFO</logLevel>
 
-                    <i18nConstantsBundle>com.candor.bp.client.i18n.I18nConstants</i18nConstantsBundle>
-                    <i18nConstantsWithLookupBundle>com.candor.bp.client.i18n.I18nLookupConstants</i18nConstantsWithLookupBundle>
+                    <i18nConstantsBundle>com.candor.sp.client.i18n.I18nConstants</i18nConstantsBundle>
+                    <i18nConstantsWithLookupBundle>com.candor.sp.client.i18n.I18nLookupConstants</i18nConstantsWithLookupBundle>
                     <!-- do not generate Messages, we are using @Plural forms -->
 
                     <generateDirectory>src/main/java</generateDirectory>

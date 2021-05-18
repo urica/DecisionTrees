@@ -21,12 +21,12 @@
 	<!-- GWT RPC Servlet -->
 	<servlet>
 		<servlet-name>rpcServlet</servlet-name>
-		<servlet-class>com.candor.bp.server.rpc.RpcServiceImpl</servlet-class>
+		<servlet-class>com.candor.sp.server.rpc.RpcServiceImpl</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>rpcServlet</servlet-name>
-		<url-pattern>/ProximityPlaces/rpc</url-pattern>
+		<url-pattern>/ID3/rpc</url-pattern>
 	</servlet-mapping>
 
 	<!-- Default page to serve -->
