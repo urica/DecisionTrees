@@ -1,0 +1,128 @@
+.idf-tree-item{
+    display: flex;
+
+    .idf-expand{
+        width: 16px;
+        height: 24px;
+        // padding: 4px 0;
+        position: relative;
+        &:before{
+            position: absolute;
+            content: '';
+            @include equilateral-triangle('right', 4px, $flatlightblue);
+            transition: all .3s cubic-bezier(0, 0, 0.35, 1.53);
+            top:10px;
+            left:0;
+        }
+        &:hover{
+            cursor: pointer;
+            &:before{
+                @include equilateral-triangle('right', 4px, $blue);
+                left:2px;
+            }
+        }
+        &.idf-hidden{
+            display: block!important;
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+    .idf-expand-active{
+        &:before{
+            @include equilateral-triangle('down', 4px, $flatlightblue);
+
+        }
+        &:hover{
+            &:before{
+                @include equilateral-triangle('down', 4px, $blue);
+                top:12px;
+                left: 0;
+            }
+        }
+    }
+    .idf-item-name-wrapp{
+        display:flex;
+        align-items: center;
+    }
+    .idf-item-name{
+        position: relative;
+        color: $lightblue;
+        line-height: 16px;
+        display: flex;
+        padding: 5px 0;
+        cursor: grab;
+
+        &:active { 
+            cursor: grabbing; 
+        }
+
+        i{
+            border-radius: 2px;
+            background:$flatlightblue;
+            display: inline-block;
+            margin-right: 3px;
+            height: 16px;
+
+            &:before{
+                content: '';
+                width: 16px;
+                height: 16px;
+                background-image: url("../img/json/string.svg");
+                display: inline-block;
+            }
+        }
+        
+    }
+    //hide all children except main
+    .idf-children-list .idf-children-list{
+        display:none;
+    }
+
+    //item types (default string)
+    .idf-object > .idf-item-name-wrapp i::before{
+        background-image: url("../img/json/object.svg");
+    }
+    .idf-array > .idf-item-name-wrapp i::before{
+        background-image: url("../img/json/array.svg");
+    }
+
+    //item + subitems map status (default not mapped)
+    .idf-mapped > .idf-item-name-wrapp i{
+        background: $green
+    }
+    .idf-half-mapped > .idf-item-name-wrapp i{
+        background: linear-gradient(45deg, $flatlightblue 49.999%, $green 50%);
+    }
+
+    //actions
+    .idf-inline-actions{
+        padding-left:1em;
+        opacity:0;
+        pointer-events: none;
+        transform: translateX(-.8em);
+        transition: all .3s $flashease;
+
+        .idf-all-caps-label{
+            color:$blue;
+            transition: all .3s ease;
+
+            &:hover{
+                cursor: pointer;
+                color:$flatblue;
+            }
+        }
+        .idf-line{
+            color:$flatlightblue;
+            font-size:10px;
+            line-height: 12px;
+            vertical-align: top;
+        }
+    }
+
+    .idf-item-name-wrapp:hover .idf-inline-actions{
+        opacity:1;
+        pointer-events:all;
+        transform: translateX(0);
+    }
+
+}

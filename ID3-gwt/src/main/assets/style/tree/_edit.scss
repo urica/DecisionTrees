@@ -1,0 +1,421 @@
+.idf-integration-general{
+    display: flex;
+    padding: 25px 25px 10px;
+
+    *{
+        box-sizing: border-box;
+    }
+    
+    & > div:nth-child(1){
+        width: 45%;
+        padding-right: 30px;
+    }
+    & > div:nth-child(2){
+        width: 60%;
+    }
+
+    .idf-src{
+        margin-top:17px;
+
+        vaadin-combo-box{
+            width: 30%;
+            margin-left: 20px;
+        }
+    }
+    .idf-auth{
+        margin-top:17px;
+
+        vaadin-combo-box,
+        div{
+            width: 100%;
+        }
+        div + div{
+            padding-left:20px;
+        }
+        paper-input{
+            margin-bottom:17px;
+        }
+        paper-button{
+            margin: 20px 0;
+        }
+    }
+    paper-textarea{
+        margin-bottom:30px;
+    }
+
+    .idf-param{
+        margin-bottom: 13px;
+        margin-top: 10px;
+
+        .idf-query-parameters{
+            align-items: center;
+            margin-bottom:3px;
+        }
+        .idf-row * {
+            margin-left: 5px;
+        }
+        paper-input{
+            margin: 0!important;
+            flex: 1;
+            max-width: 180px;
+        }
+
+        vaadin-combo-box{
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .idf-type{
+            max-width: 130px;
+        }
+        .idf-remove-icon{
+            padding: 5px;
+            height: 26px;
+            width: 26px;
+        }
+    }
+    .idf-link{
+        padding: 4px 0;
+    }
+}
+
+.idf-integrations-edit h4{
+    margin-top:30px;
+}
+.idf-response-map{
+    padding:0;
+
+    header{
+        border-radius: 6px;
+        display: flex;
+        background: $lightblue;
+        padding: 2px 6px 2px 20px;
+        align-items: center;
+
+        span{
+            margin-right:15px;
+        }
+
+        .idf-link{
+            color:$bluegray!important;
+            &:hover{
+                background: transparent;
+                color:white;
+            }
+        }
+    }
+
+    main{
+        display: flex;
+        padding: 20px;
+    }
+    .idf-map-source-wrapp{
+        flex: 1;
+        padding-right: 20px;
+        border-right: 1px solid $bluegray;
+        margin-right: 20px;
+    }
+    .idf-map-target-wrapp{
+        width: 400px;
+    }
+
+    .idf-map-source{
+        margin-top:15px;
+    }
+    .idf-map-target{
+        margin-top:15px;
+    }
+
+    .idf-group{
+        position:relative;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+
+        //z-index fix
+        & > * {
+            z-index:1;
+        }
+        &:before{
+            content: '';
+             top:13px;
+            bottom: 0;
+            left: 4px;
+            right: 0;
+            border: 1px solid $blue;
+            box-sizing: border-box;
+            border-radius: 3px;
+            position: absolute;
+            z-index: 0;
+        }
+        &.idf-active:before{
+            top:22px;
+        }
+
+        .idf-group-content{
+            padding: 0 15px;
+            min-height:10px;
+        }
+        & > .idf-row {
+            padding: 4px 14px;
+
+            .idf-remove{
+                margin-left: auto;
+                align-self: center;
+            }
+        }
+        &.idf-active > .idf-target-item:after {
+            display:none;
+        }
+
+        &.idf-empty{
+            position:relative
+        }
+        &.idf-empty > .idf-empty-state{
+            color:$flatlightblue;
+            border:2px dashed $flatblue;
+            display: block;
+            position: absolute;
+            pointer-events: none;
+            padding: 24px;
+            text-align: center;
+            font-size: 15px;
+            box-sizing: border-box;
+            top: 55px;
+            left: 20px;
+            right: 10px;
+            width: auto;
+        }
+        &.idf-empty > .idf-group-content {
+            min-height:80px;
+        }
+
+    }
+
+    .idf-handle {
+        background-image: url("../img/tools/drag.svg");
+        opacity:.4;
+        transition: opacity .3s ease;
+        width: 35px;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor:grab;
+
+        &:hover{
+            opacity:1;
+
+        }
+    }
+
+    .idf-target-items{
+        min-height: 30px;
+    }
+
+    .idf-target-item{
+        position:relative;
+        display: flex;
+        margin: 5px 0;
+        z-index:1;
+
+        &:before{
+            content: '';
+            display: block;
+            flex: 0 0 8px; // width:8px; 
+            height:8px;
+            background: $flatlightblue;
+            margin: 11px 9px 0 0;
+            border-radius: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .idf-item-default{
+            width: 100%;
+            padding: 0 0 0 15px;
+            line-height: 28px;
+            color: $darkblue;
+            background: #FFFFFF;
+            border: 1px solid $bluegray;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 7px -5px transparentize($darkblue, .77);
+            border-radius: 4px;
+            transition: all .3s ease-in;
+            display:flex;
+            justify-content: space-between;
+
+            &:hover{
+                box-shadow: 0px 5px 8px -5px transparentize($darkblue, .45);
+                cursor: pointer;
+            }
+        }
+        .idf-item-active{
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+        //ACTIVE
+        .idf-item-head{
+            border-radius: 6px;
+            display: flex;
+            background: $lightblue;
+            padding: 4px;
+            align-items: center;
+
+            vaadin-combo-box:nth-child(1){
+                width: 220px;
+                margin-right: 4px;
+            }
+        }
+
+        .idf-item-data{
+            padding: 4px 14px 14px;
+
+            .idf-row{
+                justify-content: space-between;
+                margin-bottom: 5px;
+                align-items: center;
+            }
+
+            .idf-src{
+                box-shadow:0px 4px 10px -5px transparentize($darkblue, .75);
+                padding: 5px 10px 15px 15px;
+                transition: border-color .3s ease;
+
+                &:hover{
+                    border-color: $blue;
+                    .idf-remove-icon{
+                        opacity: 1;
+                        pointer-events: all;
+                    }
+                }
+            }
+
+            //transformations
+            vaadin-combo-box{
+                width: calc(100% - 5px);
+            }
+
+            .idf-remove-icon{
+                padding: 5px;
+                height: 26px;
+                width: 26px;
+                opacity: 0;
+                pointer-events: none;
+                transition: all .3s ease-in;
+            }
+        }
+
+        .idf-item-empty{
+            text-align:center;
+            padding:22px 28px 18px 20px;
+            line-height:1.4;
+            font-size:1em;
+            color:$flatlightblue;
+
+            .idf-remove{
+                margin-top:10px;
+            }
+        }
+        .idf-link-card .idf-card + .idf-card{
+            margin-top:5px;
+        }
+    }
+
+    .idf-active{
+        & > .idf-target-item:after{
+            content: '';
+            top:22px;
+            bottom: 0;
+            left: 4px;
+            right: 0;
+            border: 1px dashed $blue;
+            box-sizing: border-box;
+            border-radius: 3px;
+            position: absolute;
+            z-index: 0;
+        }
+        & > .idf-target-item:before{
+            margin: 18px 9px 0 0;
+        }
+        & > .idf-target-item .idf-item-default{
+            display: none;
+        }
+        & > .idf-target-item .idf-item-active{
+            display: block;
+            width: calc(100% - 17px);
+        }
+    }
+
+
+    // info text for action
+    .idf-switch{
+        position:relative;
+        height:28px;
+        width:100%;
+        overflow:hidden;
+
+        span{
+            position:absolute;
+            left:0;
+            line-height:28px!important;
+        }
+        .idf-all-caps-label{
+            transform: translateY(-10px);
+            opacity:0;
+            pointer-events:none;
+            transition: transform .2s cubic-bezier(0.29, 0.74, 0.41, 1.32), opacity .2s ease;
+        }
+        .idf-name{
+            transition: opacity .2s ease, transform .2s cubic-bezier(0.29, 0.74, 0.41, 1.32);
+            transform: translateY(0);
+        }
+    }
+
+    .idf-switch:hover{
+        .idf-all-caps-label{
+            opacity:1;
+            transform: translateY(0);
+        }
+        .idf-name{
+            opacity:0;
+            transform: translateY(10px);
+        }
+    }
+
+    .idf-remove{
+        display:block;
+        color:$red;
+        opacity: .55;
+        transition: opacity .3s ease-in;
+        padding: 6px 2px;
+        z-index: 2;
+        &:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+
+    .idf-empty-state{
+        display:none;
+    }
+    .idf-empty {
+    position:relative;
+
+        .idf-target-items{
+            min-height:120px
+        }
+        .idf-empty-state{
+            display:block;
+            position:absolute;
+            top:0;
+            pointer-events:none;
+            padding:40px;
+            text-align:center;
+            font-size:15px;
+            width:100%;
+            color:$flatlightblue;
+            border:2px dashed $flatblue;
+            box-sizing: border-box;
+        }
+    }
+
+}
