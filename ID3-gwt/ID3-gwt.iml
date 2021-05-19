@@ -27,14 +27,13 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.asm:asm-analysis:7.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.asm:asm-commons:7.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: colt:colt:1.2.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.ibm.icu:icu4j:63.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: tapestry:tapestry:4.0.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.sourceforge.htmlunit:htmlunit:2.19" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: xalan:xalan:2.7.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: xalan:serializer:2.7.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpclient:4.5.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpcore:4.4.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpmime:4.5.1" level="project" />
@@ -44,7 +43,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.sourceforge.nekohtml:nekohtml:1.9.22" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.sourceforge.cssparser:cssparser:0.9.18" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty.websocket:websocket-client:9.2.13.v20150730" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty.websocket:websocket-common:9.2.14.v20151106" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty.websocket:websocket-api:9.2.14.v20151106" level="project" />
@@ -86,5 +85,11 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.jsinterop:base:1.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.elemental2:elemental2-promise:1.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.elemental2:elemental2-dom:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.opencsv:opencsv:5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.11" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-text:1.9" level="project" />
+    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.20" level="project" />
   </component>
 </module>
