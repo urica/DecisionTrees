@@ -49,10 +49,14 @@ public class ID3ViewImpl extends Composite implements ID3View {
         createTree("{\"name\":\"John\", \"age\":31, \"city\":\"New York\"}");
 
         initComponents();
+
+        addEventHandlers();
     }
 
     private void addEventHandlers(){
-
+        createTree.addEventListener("click", evt->{
+            presenter.onCreateTable(Js.uncheckedCast(id3type.getSelectedItem()));
+        });
     }
 
     private void initComponents() {
@@ -65,7 +69,7 @@ public class ID3ViewImpl extends Composite implements ID3View {
         this.presenter = presenter;
     }
 
-    private void createTree(String tree){
+    public void createTree(String tree){
         JSONObject root = (JSONObject) JSONParser.parseStrict(tree);
         this.getElement().getStyle().setOverflow(Style.Overflow.AUTO);
 

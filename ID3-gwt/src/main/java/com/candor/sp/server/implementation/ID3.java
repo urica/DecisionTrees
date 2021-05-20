@@ -1,6 +1,7 @@
 package com.candor.sp.server.implementation;
 
 import com.candor.sp.server.model.DataFraud;
+import com.candor.sp.shared.GainType;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -26,7 +27,12 @@ public class ID3 {
     private List<DataFraud> testData = new ArrayList<>();
     private int amIntrat = 0;
 
-    public void createTree() throws IOException {
+    public String createTree(String gainType) throws IOException {
+        if (gainType.equals(GainType.GAIN_RATIO.getValue()))
+            withGainRatio = true;
+        else
+            withGainRatio = false;
+
         setList();
         setTestData();
 
@@ -38,14 +44,12 @@ public class ID3 {
         TreeNode tree = new TreeNode(new Attribute(rootAttr, getAttrValues(dataSet, rootAttr)));
 
         computeTree(dataSet, tree, dataSetCols, withGainRatio);
-        System.out.println(p.printDFS(tree).size());
+
         testData.forEach(test -> {
             testIfISFraud(test, tree);
         });
 
-        System.out.println("The best: " + p.getJSON(tree));
-
-
+        return p.getJSON(tree);
     }
 
     private void testIfISFraud(DataFraud testData, TreeNode decisionTree) {

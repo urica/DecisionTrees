@@ -17,9 +17,9 @@ public class RpcServiceImpl extends RemoteServiceServlet implements RpcService {
     @Override
     public String myMethod(String s) {
         ID3 id3 = new ID3();
-
+        System.out.println("gainType = " + s);
         try {
-            id3.createTree();
+            return id3.createTree(s);
         } catch (IOException e) {
             e.printStackTrace();
         }

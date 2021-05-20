@@ -45,7 +45,12 @@ public class ID3PresenterImpl implements ID3Presenter {
     public void bind() {
         view.setPresenter(this);
 
-        rpcService.myMethod("da", new AsyncCallback<String>() {
+        addEventBusHandlers();
+    }
+
+    @Override
+    public void onCreateTable(String gainType){
+        rpcService.myMethod(gainType, new AsyncCallback<String>() {
             @Override
             public void onFailure(Throwable throwable) {
                 GWT.log("FAILD");
@@ -53,11 +58,9 @@ public class ID3PresenterImpl implements ID3Presenter {
 
             @Override
             public void onSuccess(String s) {
-                GWT.log("STRING = " + s);
+                view.createTree(s);
             }
         });
-
-        addEventBusHandlers();
     }
 
     /**

@@ -6,5 +6,6 @@ package com.candor.sp.client.presenter;
  */
 public interface ID3Presenter extends Presenter {
 
+    void onCreateTable(String gainType);
 
 }

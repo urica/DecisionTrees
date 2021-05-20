@@ -27,12 +27,10 @@ public class ID3 extends AbstractEntryPoint {
                 PaperInputElement.SRC,
                 PaperIconButtonElement.SRC,
                 PaperButtonElement.SRC,
+                "vaadin-combo-box/vaadin-combo-box.html",
                 VaadinDatePickerElement.SRC,
                 VaadinComboBoxElement.SRC),
-                arg -> {//@formatter:on
-                    /*
-                     * Code Splitting: performance driven choice
-                     */
+                arg -> {
                     GWT.runAsync(AppFrame.class, new RunAsyncCallback() {
 
                         @Override

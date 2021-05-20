@@ -2,9 +2,6 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
 >
-<!--    <ui:with type="com.candorgrc.idfusion.gwt.client.i18n.IdFusionMessages" field="i18n"/>-->
-<!--    <ui:with type="com.candorgrc.core.gwt.client.messages.CoreMessages" field="constants"/>-->
-<!--    <ui:with type="com.candorgrc.common.gwt.client.translations.CommonMessages" field="common"/>-->
     <ui:style>
 
     </ui:style>
