@@ -1,6 +1,6 @@
 package com.candor.sp.server.implementation;
 
-import com.candor.sp.shared.DataFraud;
+import com.candor.sp.server.model.DataFraud;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -54,9 +54,9 @@ public class ID3 {
                 String value = testData.getValueByColName(tree.getAttribute().getName());
                 testIfISFraud(testData, tree.getChildren().get(value));
             } else {
-                System.out.println("am intrat: " + amIntrat++);
-                System.out.println("This data tell us that will " + (tree.getTargetLabel().equals("N") ? " not " : "") + " be a fraud!");
-                System.out.println("Test data sais that is " + (testData.getFraud_reported().equals("N") ? " not " : "") + " fraud!");
+//                System.out.println("am intrat: " + amIntrat++);
+//                System.out.println("This data tell us that will " + (tree.getTargetLabel().equals("N") ? " not " : "") + " be a fraud!");
+//                System.out.println("Test data sais that is " + (testData.getFraud_reported().equals("N") ? " not " : "") + " fraud!");
                 if (testData.getFraud_reported().equals(tree.getTargetLabel())) {
                     correct_predictions++;
                 }
@@ -199,7 +199,7 @@ public class ID3 {
 
     private void setList() throws IOException {
         // create a reader
-        Reader reader = Files.newBufferedReader(Paths.get("/home/samuel/Licpic/CsvParser/src/main/resources/myDataSet.csv"));
+        Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/com/candor/sp/data/myDataSet.csv"));
 
         // create csv bean reader
         CsvToBean csvToBean = new CsvToBeanBuilder(reader)
@@ -212,7 +212,7 @@ public class ID3 {
 
     private void setTestData() throws IOException {
         // create a reader
-        Reader reader = Files.newBufferedReader(Paths.get("/home/samuel/Licpic/CsvParser/src/main/resources/testData.csv"));
+        Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/com/candor/sp/data/testData.csv"));
 
         // create csv bean reader
         CsvToBean csvToBean = new CsvToBeanBuilder(reader)

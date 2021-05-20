@@ -1,4 +1,4 @@
-package com.candor.sp.shared;
+package com.candor.sp.server.model;
 
 import com.opencsv.bean.CsvBindByName;
 import lombok.Data;

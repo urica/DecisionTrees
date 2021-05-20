@@ -47,7 +47,6 @@ public class PrintTree {
 
         JsonObject myStuff = new JsonObject();
         res.forEach(el->{
-            System.out.println("HIIII");
             myStuff.add("ROOT",el);
         });
 //        System.out.println("JSON: " + myStuff.toString());
@@ -65,7 +64,6 @@ public class PrintTree {
             for (String valueName : children.keySet()) {
                 JsonObject objval = new JsonObject();
                 obj.add(valueName, objval);
-                System.out.println("Sunt aici");
                 getJSON(children.get(valueName), objval, res);
             }
         }

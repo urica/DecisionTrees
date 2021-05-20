@@ -61,7 +61,7 @@ public class AppFrame extends ResizeComposite {
 	 */
 	public void onHistoryEvent(ValueChangeEvent<String> event) {
 		/* Render {@link CityView} */
-		if (Token.CITY.equals(History.getToken()) || History.getToken().isEmpty()) {
+		if (Token.CONFIG.equals(History.getToken()) || History.getToken().isEmpty()) {
 			/*
 			 * Code Splitting performance driven choice
 			 */
@@ -69,7 +69,7 @@ public class AppFrame extends ResizeComposite {
 
 				@Override
 				public void onSuccess() {
-					AppGinjector.INSTANCE.getCityPresenter().go(context);
+					AppGinjector.INSTANCE.getID3PResenter().go(context);
 				}
 				@Override
 				public void onFailure(Throwable reason) {
@@ -79,7 +79,7 @@ public class AppFrame extends ResizeComposite {
 
 			// sync default view with {@link History} iff necessary
 			if (History.getToken().isEmpty()) {
-				History.newItem(Token.CITY, false);
+				History.newItem(Token.CONFIG, false);
 			}
 
 		}

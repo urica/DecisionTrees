@@ -18,6 +18,6 @@ public final class Token {
 		throw new AssertionError(getClass().getName() + " utility class cannot be instatiated.");
 	}
 
-	public static final String CITY = "city";
+	public static final String CONFIG = "config";
 
 }

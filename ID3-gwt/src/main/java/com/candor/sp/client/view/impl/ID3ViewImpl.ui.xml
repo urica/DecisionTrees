@@ -17,20 +17,20 @@
         box-shadow: 0 0 5px 1px #969696;
         }
 
-<!--        vaadin-combo-box {-->
-<!--        width: 100%;-->
-<!--        font-family: sans-serif;-->
-<!--        font-size: 20px;-->
-<!--        border-radius: 6px;-->
-<!--        padding: 14px;-->
-<!--        border: solid 1px #dcdcdc;-->
-<!--        transition: box-shadow 0.3s, border 0.3s;-->
-<!--        }-->
+        <!--        vaadin-combo-box {-->
+        <!--        width: 100%;-->
+        <!--        font-family: sans-serif;-->
+        <!--        font-size: 20px;-->
+        <!--        border-radius: 6px;-->
+        <!--        padding: 14px;-->
+        <!--        border: solid 1px #dcdcdc;-->
+        <!--        transition: box-shadow 0.3s, border 0.3s;-->
+        <!--        }-->
 
-<!--        vaadin-combo-box:focus, input[type="text"].focus {-->
-<!--        border: solid 1px #cbcbcb;-->
-<!--        box-shadow: 0 0 5px 1px #969696;-->
-<!--        }-->
+        <!--        vaadin-combo-box:focus, input[type="text"].focus {-->
+        <!--        border: solid 1px #cbcbcb;-->
+        <!--        box-shadow: 0 0 5px 1px #969696;-->
+        <!--        }-->
 
         .box {
         margin: 100px auto 0px;
@@ -46,14 +46,18 @@
         }
     </ui:style>
     <g:HTMLPanel>
-        		<div class="{style.box}">
-        			<g:TextBox ></g:TextBox>
-        		</div>
+<!--        <div class="{style.box}">-->
+<!--            <g:TextBox></g:TextBox>-->
+<!--        </div>-->
         <vaadin-combo-box class="{style.box}"
                           label="Gain type"
                           ui:field="id3type"
                           item-label-path="string"
                           allaw-custom-value="true"/>
+        <paper-button noink="true" class="idf-btn" ui:field="createTree">
+            <div>Create Tree</div>
+            <!--            <ui:text from="{i18n.integration_save}"/>-->
+        </paper-button>
         <div class="idf-tree-item" ui:field="treeElement"></div>
     </g:HTMLPanel>
 </ui:UiBinder> 

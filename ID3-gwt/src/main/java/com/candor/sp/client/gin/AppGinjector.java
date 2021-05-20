@@ -37,7 +37,7 @@ public interface AppGinjector extends Ginjector {
 	ID3View getCityView();
 
 	// presenter
-	ID3Presenter getCityPresenter();
+	ID3Presenter getID3PResenter();
 
 	// framework
 	AppFrame getAppFrame();

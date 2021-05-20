@@ -3,10 +3,6 @@
  */
 package com.candor.sp.client.util;
 
-import com.google.gwt.core.client.GWT;
-
-import java.util.concurrent.Callable;
-
 /**
  * Non-inheritable client utility class.
  * 
