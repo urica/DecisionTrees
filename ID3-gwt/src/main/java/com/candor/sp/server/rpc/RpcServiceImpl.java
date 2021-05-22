@@ -5,6 +5,7 @@ import com.candor.sp.server.implementation.ID3;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * The server side implementation of the RPC service.
@@ -14,15 +15,19 @@ import java.io.IOException;
  */
 @SuppressWarnings("serial")
 public class RpcServiceImpl extends RemoteServiceServlet implements RpcService {
+    private ID3 id3 = new ID3();
     @Override
     public String myMethod(String s) {
-        ID3 id3 = new ID3();
-        System.out.println("gainType = " + s);
         try {
             return id3.createTree(s);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "MyString";
+        return "";
+    }
+
+    @Override
+    public List<String> getAllColumnNames(){
+        return id3.getAllColumnsName();
     }
 }

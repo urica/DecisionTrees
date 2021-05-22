@@ -3,10 +3,14 @@ package com.candor.sp.client.rpc;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import java.util.List;
+
 public interface RpcServiceAsync
 {
 
     public void myMethod(String s, AsyncCallback<String> callback);
+
+    public List<String> getAllColumnNames(AsyncCallback<List<String>> callback);
 
     /**
      * Utility class to get the RPC Async interface from client-side code

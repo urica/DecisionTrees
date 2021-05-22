@@ -14,10 +14,15 @@ import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.vaadin.polymer.Polymer;
 import com.vaadin.polymer.paper.PaperButtonElement;
 import com.vaadin.polymer.vaadin.VaadinComboBoxElement;
 import elemental2.core.JsArray;
+import elemental2.dom.Event;
+import elemental2.dom.EventListener;
 import elemental2.dom.HTMLElement;
 import jsinterop.base.Js;
 
@@ -38,14 +43,10 @@ public class ID3ViewImpl extends Composite implements ID3View {
     @UiField
     protected PaperButtonElement createTree;
 
-
     private ID3Presenter presenter;
 
     public ID3ViewImpl() {
         initWidget(uiBinder.createAndBindUi(this));
-
-
-
         createTree("{\"name\":\"John\", \"age\":31, \"city\":\"New York\"}");
 
         initComponents();
@@ -70,12 +71,19 @@ public class ID3ViewImpl extends Composite implements ID3View {
     }
 
     public void createTree(String tree){
+        clearTree();
         JSONObject root = (JSONObject) JSONParser.parseStrict(tree);
         this.getElement().getStyle().setOverflow(Style.Overflow.AUTO);
 
         TreeNode node = new TreeNode();
         treeElement.appendChild(Js.uncheckedCast(node.containerForOtherItems));
         JsonTreeViewer.createTree(node, root);
+    }
+
+    private void clearTree(){
+        while (treeElement.firstChild != null) {
+            treeElement.removeChild(treeElement.firstChild);
+        }
     }
 
     interface ID3ViewImplUiBinder extends UiBinder<HTMLPanel, ID3ViewImpl> {

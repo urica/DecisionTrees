@@ -13,6 +13,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.inject.Inject;
 
+import java.util.List;
+
 /**
  * @author sp
  *
@@ -62,6 +64,22 @@ public class ID3PresenterImpl implements ID3Presenter {
             }
         });
     }
+
+    @Override
+    public void getAllColumnNames() {
+
+        rpcService.getAllColumnNames(new AsyncCallback<List<String>>() {
+            @Override
+            public void onFailure(Throwable throwable) {
+                GWT.log("getAllColumnNames - FAILD");
+            }
+
+            @Override
+            public void onSuccess(List<String> s) {
+            }
+        });
+    }
+
 
     /**
      * Register handlers on the BUS

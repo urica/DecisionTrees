@@ -34,7 +34,8 @@ public class JsonTreeViewer {
                 String childKey = path.isEmpty() ? k : path + "." + k;
                 node.getItemName().setAttribute("path", childKey);
                 node.getItemName().setAttribute("targetPath", childKey);
-
+                node.getExpand().classList.add("idf-expand-active");
+                node.getContainerForOtherItems().style.display = "block";
                 parent.getContainerForOtherItems().appendChild(Js.uncheckedCast(node.getElement()));
 
                 Object child = json.get(k);
@@ -70,6 +71,8 @@ public class JsonTreeViewer {
             TreeNode node = new TreeNode();
             String s = node.getItemName().innerHTML;
             node.getItemName().innerHTML = s + " " + i;
+            node.getExpand().classList.add("idf-expand-active");
+            node.getContainerForOtherItems().style.display = "block";
             node.getItemType().classList.add("idf-object");
             String str = path + "." + i;
             node.getItemName().setAttribute("path", str);

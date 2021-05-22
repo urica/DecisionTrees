@@ -2,62 +2,173 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
     <ui:style>
-        input[type="text"] {
-        width: 100%;
-        font-family: sans-serif;
-        font-size: 20px;
-        border-radius: 6px;
-        padding: 14px;
-        border: solid 1px #dcdcdc;
-        transition: box-shadow 0.3s, border 0.3s;
+        .body {
+        font-family: Arial;
+        color: white;
+        }
+        /* Split the screen in half */
+        .split {
+        height: 100%;
+        width: 50%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: auto;
+        padding-top: 20px;
         }
 
-        input[type="text"]:focus, input[type="text"].focus {
-        border: solid 1px #cbcbcb;
-        box-shadow: 0 0 5px 1px #969696;
+        /* Split the screen in half */
+        .split-vertical {
+        height: 50%;
+        width: 50%;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        overflow-x: auto;
+        padding-left: 20px;
         }
 
-        <!--        vaadin-combo-box {-->
-        <!--        width: 100%;-->
-        <!--        font-family: sans-serif;-->
-        <!--        font-size: 20px;-->
-        <!--        border-radius: 6px;-->
-        <!--        padding: 14px;-->
-        <!--        border: solid 1px #dcdcdc;-->
-        <!--        transition: box-shadow 0.3s, border 0.3s;-->
-        <!--        }-->
-
-        <!--        vaadin-combo-box:focus, input[type="text"].focus {-->
-        <!--        border: solid 1px #cbcbcb;-->
-        <!--        box-shadow: 0 0 5px 1px #969696;-->
-        <!--        }-->
-
-        .box {
-        margin: 100px auto 0px;
-        width: 400px;
+        /* Control the left side */
+        .left {
+        left: 0;
+        background-color: #bdcebe;
         }
 
-        .list {
-        margin: 0px auto;
-        width: 400px;
-        cursor: pointer;
-        font-size: 18px;
-        color: #333;
+        /* Control the right side */
+        .right {
+        right: 0;
         }
+
+        /* Control the right side */
+        .top {
+        top: 0;
+        }
+
+        /* Control the right side */
+        .bottom {
+        bottom: 0;
+        background-color: white;
+        }
+
+
+        /* If you want the content centered horizontally and vertically */
+        .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        }
+
+
+        /* Style the image inside the centered container, if needed */
+        .centered img {
+        width: 150px;
+        border-radius: 50%;
+        }
+
+        .tree-position{
+        margin-top: 3%;
+        }
+
+        .tree-label{
+        margin-left: 2%;
+        font-size: xx-large;
+        font-family: monospace;
+        }
+
+        .paper-button {
+        border-style: outset;
+        }
+        .paper-button:hover {
+        background-color: #97a498;
+        }
+        .paper-button:active {
+        background-color: #97a498;
+        border-style: insert !important;
+        }
+
+        .id3-paper-input{
+        width:20% !important;
+        margin: 2%;
+        }
+
     </ui:style>
-    <g:HTMLPanel>
-<!--        <div class="{style.box}">-->
-<!--            <g:TextBox></g:TextBox>-->
-<!--        </div>-->
-        <vaadin-combo-box class="{style.box}"
-                          label="Gain type"
-                          ui:field="id3type"
-                          item-label-path="string"
-                          allaw-custom-value="true"/>
-        <paper-button noink="true" class="idf-btn" ui:field="createTree">
-            <div>Create Tree</div>
-            <!--            <ui:text from="{i18n.integration_save}"/>-->
-        </paper-button>
-        <div class="idf-tree-item" ui:field="treeElement"></div>
+    <g:HTMLPanel styleName="idf-slot idf-integration-view">
+        <div class="{style.split} {style.left} idf-row">
+
+            <div class="{style.split-vertical} {style.top}">
+                <h2>Configuration
+                </h2>
+                <vaadin-combo-box class="idf-input {style.id3-paper-input}"
+                                  label="Gain type"
+                                  ui:field="id3type"
+                                  item-label-path="string"
+                                  allaw-custom-value="true"/>
+                <div style="display:flex">
+                    <paper-input class="idf-input {style.id3-paper-input}" label="gfetrhqthwertg"
+                                 always-float-label="true" noink="true"
+                                 required="true"
+                                 auto-validate="true"/>
+                    <paper-input class="idf-input {style.id3-paper-input}" label="gfetrhqthwertg"
+                                 always-float-label="true" noink="true"
+                                 required="true"
+                                 auto-validate="true"/>
+                    <paper-input class="idf-input {style.id3-paper-input}" label="gfetrhqthwertg"
+                                 always-float-label="true" noink="true"
+                                 required="true"
+                                 auto-validate="true"/>
+                    <paper-input class="idf-input {style.id3-paper-input}" label="gfetrhqthwertg"
+                                 always-float-label="true" noink="true"
+                                 required="true"
+                                 auto-validate="true"/>
+                </div>
+                <div style="display:flex">
+                    <paper-input class="idf-input {style.id3-paper-input}" label="gfetrhqthwertg"
+                                 always-float-label="true" noink="true"
+                                 required="true"
+                                 auto-validate="true"/>
+                    <paper-input class="idf-input {style.id3-paper-input}" label="gfetrhqthwertg"
+                                 always-float-label="true" noink="true"
+                                 required="true"
+                                 auto-validate="true"/>
+                    <paper-input class="idf-input {style.id3-paper-input}" label="gfetrhqthwertg"
+                                 always-float-label="true" noink="true"
+                                 required="true"
+                                 auto-validate="true"/>
+                    <paper-input class="{style.id3-paper-input} idf-input " label="gfetrhqthwertg"
+                                 always-float-label="true" noink="true"
+                                 required="true"
+                                 auto-validate="true"/>
+                </div>
+
+
+                <paper-button noink="true" class="{style.paper-button}" ui:field="createTree">
+                    <div>Create Tree</div>
+                </paper-button>
+            </div>
+
+            <div class="{style.split-vertical} {style.bottom}">
+                <h2>alooooo</h2>
+                <p>Some text.</p>
+            </div>
+
+            <!--            </div>-->
+        </div>
+
+        <div class="{style.split} {style.right} idf-row">
+            <h2 class="{style.tree-label}">Decision tree:</h2>
+            <div></div>
+            <div class="{style.tree-position}">
+                <div class="idf-tree-item" style="margin-left: 3%; overflow:auto;" ui:field="treeElement"></div>
+            </div>
+        </div>
+
+
+        <!--        <div class="{style.box}">-->
+        <!--            <g:TextBox></g:TextBox>-->
+        <!--        </div>-->
+
+        <!--        <div class="idf-tree-item" ui:field="treeElement"></div>-->
     </g:HTMLPanel>
 </ui:UiBinder> 

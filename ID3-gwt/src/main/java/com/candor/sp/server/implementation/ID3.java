@@ -58,9 +58,6 @@ public class ID3 {
                 String value = testData.getValueByColName(tree.getAttribute().getName());
                 testIfISFraud(testData, tree.getChildren().get(value));
             } else {
-//                System.out.println("am intrat: " + amIntrat++);
-//                System.out.println("This data tell us that will " + (tree.getTargetLabel().equals("N") ? " not " : "") + " be a fraud!");
-//                System.out.println("Test data sais that is " + (testData.getFraud_reported().equals("N") ? " not " : "") + " fraud!");
                 if (testData.getFraud_reported().equals(tree.getTargetLabel())) {
                     correct_predictions++;
                 }
@@ -246,5 +243,9 @@ public class ID3 {
         public void setNeg(double neg) {
             this.neg = neg;
         }
+    }
+
+    public List<String> getAllColumnsName(){
+        return this.dataSetCols;
     }
 }
