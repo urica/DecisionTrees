@@ -7,13 +7,16 @@ import java.util.List;
 
 /**
  * The client side stub for the RPC service.
- * 
- * @author sp
  *
+ * @author sp
  */
 @RemoteServiceRelativePath("rpc")
 public interface RpcService extends RemoteService {
     public String myMethod(String s);
 
     public List<String> getAllColumnNames();
+
+    public List<String> getAttrValuesByColumn(String column);
+
+    public String testData();
 }

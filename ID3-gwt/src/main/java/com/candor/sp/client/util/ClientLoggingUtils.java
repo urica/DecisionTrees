@@ -3,6 +3,8 @@
  */
 package com.candor.sp.client.util;
 
+import elemental2.dom.NotificationEvent;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

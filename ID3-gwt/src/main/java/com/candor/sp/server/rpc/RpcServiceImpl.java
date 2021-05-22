@@ -9,13 +9,13 @@ import java.util.List;
 
 /**
  * The server side implementation of the RPC service.
- * 
- * @author sp
  *
+ * @author sp
  */
 @SuppressWarnings("serial")
 public class RpcServiceImpl extends RemoteServiceServlet implements RpcService {
     private ID3 id3 = new ID3();
+
     @Override
     public String myMethod(String s) {
         try {
@@ -27,7 +27,18 @@ public class RpcServiceImpl extends RemoteServiceServlet implements RpcService {
     }
 
     @Override
-    public List<String> getAllColumnNames(){
+    public List<String> getAllColumnNames() {
         return id3.getAllColumnsName();
     }
+
+    @Override
+    public List<String> getAttrValuesByColumn(String column) {
+        return id3.getAttrValues(column);
+    }
+
+    public String testData() {
+        return "";
+    }
+
+    ;
 }

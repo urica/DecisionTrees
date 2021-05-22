@@ -3,6 +3,12 @@
  */
 package com.candor.sp.client.util;
 
+import com.candor.sp.client.AppFrame;
+import com.candor.sp.client.events.NotificationEvent;
+import com.candor.sp.client.gin.AppGinjector;
+import com.candor.sp.client.view.impl.ID3ViewImpl;
+import com.candor.sp.server.implementation.ID3;
+
 /**
  * Non-inheritable client utility class.
  * 
@@ -19,5 +25,17 @@ public class ClientUtils {
 		throw new AssertionError(getClass().getName() + " utility class cannot be instatiated.");
 	}
 
+	/**
+	 * @param message
+	 */
+	public static void showNotification(String message) {
+		showNotification(message, AppFrame.class);
+	}
 
+	/**
+	 * @param message
+	 */
+	public static void showNotification(String message, Object source) {
+		AppGinjector.INSTANCE.getEventBus().fireEventFromSource(new NotificationEvent(message), source);
+	}
 }

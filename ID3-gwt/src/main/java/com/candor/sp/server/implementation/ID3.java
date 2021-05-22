@@ -93,6 +93,10 @@ public class ID3 {
         });
     }
 
+    public List<String> getAttrValues(String columnName) {
+        return dataSet.stream().map(m -> m.getValueByColName(columnName)).distinct().collect(Collectors.toList());
+    }
+
     private List<String> getAttrValues(List<DataFraud> ds, String columnName) {
         return ds.stream().map(m -> m.getValueByColName(columnName)).distinct().collect(Collectors.toList());
     }

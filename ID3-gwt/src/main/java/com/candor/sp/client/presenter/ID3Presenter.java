@@ -12,4 +12,8 @@ public interface ID3Presenter extends Presenter {
 
     void getAllColumnNames();
 
+    void getAllValues(String column);
+
+    void testData();
+
 }
