@@ -23,6 +23,7 @@ public class ID3 {
     private String decisionColumn = "Fraud_reported";
     private boolean withGainRatio = true;
     private int correct_predictions = 0;
+    private TreeNode DT = null;
 
     private List<DataFraud> testData = new ArrayList<>();
     private int amIntrat = 0;
@@ -41,15 +42,28 @@ public class ID3 {
         String rootAttr = getRootNode(dataSet, decisionColumn, dataSetCols, withGainRatio);
         dataSetCols.remove(decisionColumn);
         dataSetCols.remove(rootAttr);
-        TreeNode tree = new TreeNode(new Attribute(rootAttr, getAttrValues(dataSet, rootAttr)));
+        DT = new TreeNode(new Attribute(rootAttr, getAttrValues(dataSet, rootAttr)));
 
-        computeTree(dataSet, tree, dataSetCols, withGainRatio);
+        computeTree(dataSet, DT, dataSetCols, withGainRatio);
 
         testData.forEach(test -> {
-            testIfISFraud(test, tree);
+            testIfISFraud(test, DT);
         });
 
-        return p.getJSON(tree);
+        return p.getJSON(DT);
+    }
+
+    public String testData(DataFraud testData) {
+        AtomicReference<String> isFraud = new AtomicReference<>("");
+        Optional.ofNullable(DT).ifPresent(tree -> {
+            if (tree.getType().equals("root")) {
+                String value = testData.getValueByColName(tree.getAttribute().getName());
+                testIfISFraud(testData, tree.getChildren().get(value));
+            } else {
+                isFraud.set(tree.getTargetLabel());
+            }
+        });
+        return isFraud.get();
     }
 
     private void testIfISFraud(DataFraud testData, TreeNode decisionTree) {
@@ -228,6 +242,10 @@ public class ID3 {
         testData = getListFromIterator(((Iterable<DataFraud>) csvToBean).iterator());
     }
 
+    public List<String> getAllColumnsName() {
+        return this.dataSetCols;
+    }
+
     class SplitInfo {
         private double poz;
         private double neg;
@@ -247,9 +265,5 @@ public class ID3 {
         public void setNeg(double neg) {
             this.neg = neg;
         }
-    }
-
-    public List<String> getAllColumnsName(){
-        return this.dataSetCols;
     }
 }

@@ -6,7 +6,7 @@ import com.google.gwt.event.shared.EventHandler;
  * {@link FunctionalInterface} providing the means of handling a
  * {@NotificationEvent}
  *
- * @author bp
+ * @author sp
  */
 @FunctionalInterface
 public interface NotificationEventHandler extends EventHandler {

@@ -3,7 +3,7 @@ package com.candor.sp.client.events;
 import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * @author bp
+ * @author sp
  */
 public class NotificationEvent extends GwtEvent<NotificationEventHandler> {
 

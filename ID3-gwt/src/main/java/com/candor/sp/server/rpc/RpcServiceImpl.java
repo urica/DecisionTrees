@@ -37,7 +37,7 @@ public class RpcServiceImpl extends RemoteServiceServlet implements RpcService {
     }
 
     public String testData() {
-        return "";
+        return id3.testData(null);
     }
 
     ;
