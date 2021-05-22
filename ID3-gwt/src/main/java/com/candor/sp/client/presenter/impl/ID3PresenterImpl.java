@@ -3,13 +3,16 @@
  */
 package com.candor.sp.client.presenter.impl;
 
+import com.candor.sp.client.jsi.JQuery;
 import com.candor.sp.client.presenter.ID3Presenter;
 import com.candor.sp.client.presenter.Presenter;
 import com.candor.sp.client.rpc.RpcService;
 import com.candor.sp.client.rpc.RpcServiceAsync;
 import com.candor.sp.client.util.ClientUtils;
 import com.candor.sp.client.view.ID3View;
+import com.candor.sp.shared.DataFraud;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -19,7 +22,9 @@ import com.vaadin.polymer.Polymer;
 import com.vaadin.polymer.vaadin.VaadinComboBoxElement;
 import elemental2.core.JsArray;
 import elemental2.dom.CSSProperties;
+import jsinterop.base.Js;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -158,6 +163,25 @@ public class ID3PresenterImpl implements ID3Presenter {
 
     @Override
     public void testData() {
+        DataFraud data = new DataFraud();
+
+        Arrays.stream(JQuery.$(view.getFields()).children().get()).forEach(element -> {
+            VaadinComboBoxElement comboBox = Js.uncheckedCast(element);
+
+            data.putValueByColName(comboBox.getName(), comboBox.getValue());
+
+            GWT.log("-> " + data.getIncident_severity());
+        });
+
+        GWT.runAsync(new RunAsyncCallback() {
+            public void onFailure(final Throwable reason) {
+            }
+
+            public void onSuccess() {
+                GWT.log("data = " + data.getIncident_severity());
+            }
+        });
+
     }
 
     /**

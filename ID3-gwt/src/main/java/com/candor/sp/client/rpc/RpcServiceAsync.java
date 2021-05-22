@@ -31,7 +31,7 @@ public interface RpcServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see com.candor.sp.client.rpc.RpcService
      */
-    void testData( AsyncCallback<java.lang.String> callback );
+    void testData( com.candor.sp.shared.DataFraud data, AsyncCallback<java.lang.String> callback );
 
 
     /**

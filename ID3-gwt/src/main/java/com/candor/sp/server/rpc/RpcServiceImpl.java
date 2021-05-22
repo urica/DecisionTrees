@@ -2,6 +2,7 @@ package com.candor.sp.server.rpc;
 
 import com.candor.sp.client.rpc.RpcService;
 import com.candor.sp.server.implementation.ID3;
+import com.candor.sp.shared.DataFraud;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import java.io.IOException;
@@ -36,8 +37,8 @@ public class RpcServiceImpl extends RemoteServiceServlet implements RpcService {
         return id3.getAttrValues(column);
     }
 
-    public String testData() {
-        return id3.testData(null);
+    public String testData(DataFraud data) {
+        return id3.testData(data);
     }
 
     ;

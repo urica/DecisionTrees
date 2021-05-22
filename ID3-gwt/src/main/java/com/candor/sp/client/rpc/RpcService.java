@@ -1,5 +1,6 @@
 package com.candor.sp.client.rpc;
 
+import com.candor.sp.shared.DataFraud;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -18,5 +19,5 @@ public interface RpcService extends RemoteService {
 
     public List<String> getAttrValuesByColumn(String column);
 
-    public String testData();
+    public String testData(DataFraud data);
 }

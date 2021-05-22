@@ -1,6 +1,6 @@
 package com.candor.sp.server.implementation;
 
-import com.candor.sp.server.model.DataFraud;
+import com.candor.sp.shared.DataFraud;
 import com.candor.sp.shared.GainType;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -40,8 +40,7 @@ public class ID3 {
         dataSetCols = Arrays.stream(DataFraud.class.getMethods()).filter(f -> f.getName().contains("set")).map(m -> m.getName().replace("set", "")).sorted().collect(Collectors.toList());
         dataSetCols.remove(decisionColumn);
         String rootAttr = getRootNode(dataSet, decisionColumn, dataSetCols, withGainRatio);
-        dataSetCols.remove(decisionColumn);
-        dataSetCols.remove(rootAttr);
+//        dataSetCols.remove(rootAttr);
         DT = new TreeNode(new Attribute(rootAttr, getAttrValues(dataSet, rootAttr)));
 
         computeTree(dataSet, DT, dataSetCols, withGainRatio);
@@ -54,12 +53,15 @@ public class ID3 {
     }
 
     public String testData(DataFraud testData) {
-        AtomicReference<String> isFraud = new AtomicReference<>("");
+        AtomicReference<String> isFraud = new AtomicReference<>("N");//Default set to NO
         Optional.ofNullable(DT).ifPresent(tree -> {
             if (tree.getType().equals("root")) {
+                System.out.println("------- " + tree.getAttribute().getName());
                 String value = testData.getValueByColName(tree.getAttribute().getName());
+                System.out.println("VALUE: " + value);
                 testIfISFraud(testData, tree.getChildren().get(value));
             } else {
+                System.out.println("DECIZIA ESTE: " + tree.getTargetLabel());
                 isFraud.set(tree.getTargetLabel());
             }
         });
