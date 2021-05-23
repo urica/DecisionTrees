@@ -27,6 +27,7 @@ public class ID3 {
 
     private List<DataFraud> testData = new ArrayList<>();
     private int amIntrat = 0;
+    private String result = null;
 
     public String createTree(String gainType) throws IOException {
         if (gainType.equals(GainType.GAIN_RATIO.getValue()))
@@ -45,40 +46,30 @@ public class ID3 {
 
         computeTree(dataSet, DT, dataSetCols, withGainRatio);
 
-        testData.forEach(test -> {
-            testIfISFraud(test, DT);
-        });
+//        testData.forEach(test -> {
+//            testIfISFraud(test, DT);
+//        });
 
         return p.getJSON(DT);
     }
 
     public String testData(DataFraud testData) {
-        AtomicReference<String> isFraud = new AtomicReference<>("N");//Default set to NO
-        Optional.ofNullable(DT).ifPresent(tree -> {
-            if (tree.getType().equals("root")) {
-                System.out.println("------- " + tree.getAttribute().getName());
-                String value = testData.getValueByColName(tree.getAttribute().getName());
-                System.out.println("VALUE: " + value);
-                testIfISFraud(testData, tree.getChildren().get(value));
-            } else {
-                System.out.println("DECIZIA ESTE: " + tree.getTargetLabel());
-                isFraud.set(tree.getTargetLabel());
-            }
-        });
-        return isFraud.get();
+        return testIfISFraud(testData, DT);
     }
 
-    private void testIfISFraud(DataFraud testData, TreeNode decisionTree) {
+    private String testIfISFraud(DataFraud testData, TreeNode decisionTree) {
         Optional.ofNullable(decisionTree).ifPresent(tree -> {
             if (tree.getType().equals("root")) {
                 String value = testData.getValueByColName(tree.getAttribute().getName());
                 testIfISFraud(testData, tree.getChildren().get(value));
             } else {
-                if (testData.getFraud_reported().equals(tree.getTargetLabel())) {
-                    correct_predictions++;
-                }
+                result = tree.getTargetLabel();
+//                if (testData.getFraud_reported().equals(tree.getTargetLabel())) {
+//                    correct_predictions++;
+//                }
             }
         });
+        return result;
     }
 
     private void computeTree(List<DataFraud> ds, TreeNode rootNode, List<String> columns, boolean withGainRatio) {

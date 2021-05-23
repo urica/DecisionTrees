@@ -371,62 +371,91 @@ public class DataFraud implements Serializable {
         switch (colName) {
             case "Months_as_customer":
                 setMonths_as_customer(value);
+                break;
             case "Age":
                 setAge(value);
+                break;
             case "Policy_state":
                 setPolicy_state(value);
+                break;
             case "Policy_deductable":
                 setPolicy_deductable(value);
+                break;
             case "Policy_annual_premium":
                 setPolicy_annual_premium(value);
+                break;
             case "Umbrella_limit":
                 setUmbrella_limit(value);
+                break;
             case "Insured_sex":
                 setInsured_sex(value);
+                break;
             case "Insured_education_level":
                 setInsured_education_level(value);
+                break;
             case "Insured_occupation":
                 setInsured_occupation(value);
+                break;
             case "Insured_hobbies":
                 setInsured_hobbies(value);
+                break;
             case "Insured_relationship":
                 setInsured_relationship(value);
+                break;
             case "Capital_gains":
                 setCapital_gains(value);
+                break;
             case "Capital_loss":
                 setCapital_loss(value);
+                break;
             case "Incident_type":
                 setIncident_type(value);
+                break;
             case "Incident_severity":
                 setIncident_severity(value);
+                break;
             case "Authorities_contacted":
                 setAuthorities_contacted(value);
+                break;
             case "Number_of_vehicles_involved":
                 setNumber_of_vehicles_involved(value);
+                break;
             case "Property_damage":
                 setProperty_damage(value);
+                break;
             case "Bodily_injuries":
                 setBodily_injuries(value);
+                break;
             case "Witnesses":
                 setWitnesses(value);
+                break;
             case "Police_report_available":
                 setPolice_report_available(value);
+                break;
             case "Total_claim_amount":
                 setTotal_claim_amount(value);
+                break;
             case "Injury_claim":
                 setInjury_claim(value);
+                break;
             case "Property_claim":
                 setProperty_claim(value);
+                break;
             case "Vehicle_claim":
                 setVehicle_claim(value);
+                break;
             case "Auto_make":
                 setAuto_make(value);
+                break;
             case "Auto_year":
                 setAuto_year(value);
+                break;
             case "Fraud_reported":
                 setFraud_reported(value);
+                break;
             case "Collision_type":
                 setCollision_type(value);
+                break;
             default:
                 break;
         }

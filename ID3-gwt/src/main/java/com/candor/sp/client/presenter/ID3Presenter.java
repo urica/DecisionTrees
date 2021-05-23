@@ -1,5 +1,7 @@
 package com.candor.sp.client.presenter;
 
+import com.candor.sp.shared.DataFraud;
+
 import java.util.List;
 
 /**
@@ -14,6 +16,6 @@ public interface ID3Presenter extends Presenter {
 
     void getAllValues(String column);
 
-    void testData();
+    void testData(DataFraud dataFraud);
 
 }

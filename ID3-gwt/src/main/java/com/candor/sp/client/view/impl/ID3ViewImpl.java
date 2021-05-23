@@ -3,14 +3,14 @@
  */
 package com.candor.sp.client.view.impl;
 
+import com.candor.sp.client.jsi.JQuery;
 import com.candor.sp.client.presenter.ID3Presenter;
 import com.candor.sp.client.treegenerator.JsonTreeViewer;
 import com.candor.sp.client.view.ID3View;
+import com.candor.sp.shared.DataFraud;
 import com.candor.sp.shared.GainType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -101,10 +101,14 @@ public class ID3ViewImpl extends Composite implements ID3View {
         });
 
         testData.addEventListener("click", evt -> {
-            presenter.testData();
+            DataFraud fr = new DataFraud();
+            Arrays.stream(JQuery.$(fields).children().get()).forEach(element -> {
+                VaadinComboBoxElement comboBox = Js.uncheckedCast(element);
+                fr.putValueByColName(comboBox.getName(), comboBox.getValue());
+            });
+            presenter.testData(fr);
         });
     }
-
 
 
     private void initComponents() {
