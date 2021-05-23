@@ -41,14 +41,14 @@
         /* Control the right side */
         .top {
         top: 0;
-        height: 35%;
+        height: 25%;
         }
 
         /* Control the right side */
         .bottom {
         bottom: 0;
         background-color: aliceblue;
-        height: 65%;
+        height: 75%;
         }
 
 
@@ -108,7 +108,7 @@
         }
 
         .id3-paper-input{
-        width:20% !important;
+        width:40% !important;
         margin: 20px;
         }
 
@@ -139,17 +139,20 @@
             <div class="{style.split-vertical} {style.top}">
                 <h2 class="{style.center-style}">Configuration
                 </h2>
-                <vaadin-combo-box class="idf-input {style.id3-paper-input}"
-                                  label="Gain type"
-                                  ui:field="id3type"
-                                  item-label-path="string"
-                                  allaw-custom-value="true"/>
-                <div ui:field="fileUpl" class="{style.fu-style}"></div>
-                <div></div>
+                <div style="display: flex">
+                    <vaadin-combo-box class="idf-input {style.id3-paper-input}"
+                                      label="Gain type"
+                                      ui:field="id3type"
+                                      item-label-path="string"
+                                      allaw-custom-value="true"/>
+                    <div ui:field="fileUpl" class="{style.fu-style}"></div>
+                    <div></div>
 
-                <paper-button noink="true" class="{style.paper-button}" ui:field="createTree">
-                    <div>Create Tree</div>
-                </paper-button>
+                    <paper-button noink="true" class="{style.paper-button}" ui:field="createTree">
+                        <div>Create Tree</div>
+                    </paper-button>
+                </div>
+
             </div>
 
             <div class="{style.split-vertical} {style.bottom}">

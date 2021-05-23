@@ -18,4 +18,6 @@ public interface ID3Presenter extends Presenter {
 
     void testData(DataFraud dataFraud);
 
+    void showPopup(String message);
+
 }

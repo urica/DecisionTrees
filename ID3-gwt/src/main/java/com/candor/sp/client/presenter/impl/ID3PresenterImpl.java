@@ -173,4 +173,9 @@ public class ID3PresenterImpl implements ID3Presenter {
 
     }
 
+    @Override
+    public void showPopup(String message) {
+        showCustomDialog(message).show();
+    }
+
 }

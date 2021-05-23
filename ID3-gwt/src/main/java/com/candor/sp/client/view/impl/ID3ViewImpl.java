@@ -97,7 +97,10 @@ public class ID3ViewImpl extends Composite implements ID3View {
 
     private void addEventHandlers() {
         createTree.addEventListener("click", evt -> {
-            presenter.onCreateTable(Js.uncheckedCast(id3type.getSelectedItem()));
+            if (id3type.getSelectedItem() != null)
+                presenter.onCreateTable(Js.uncheckedCast(id3type.getSelectedItem()));
+            else
+                presenter.showPopup("You need to select a gain type");
         });
 
         testData.addEventListener("click", evt -> {
