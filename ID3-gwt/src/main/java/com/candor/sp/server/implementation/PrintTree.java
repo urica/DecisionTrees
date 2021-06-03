@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PrintTree {
-    private String pic;
 
     /**
      * This method print out each path of the tree from root to leaf.
@@ -69,8 +68,4 @@ public class PrintTree {
         }
     }
 
-    @Override
-    public String toString() {
-        return pic;
-    }
 }

@@ -84,7 +84,7 @@ public class ID3PresenterImpl implements ID3Presenter {
 
     @Override
     public void onCreateTable(String gainType) {
-        rpcService.myMethod(gainType, new AsyncCallback<String>() {
+        rpcService.createTree(gainType, new AsyncCallback<String>() {
             @Override
             public void onFailure(Throwable throwable) {
                 GWT.log("FAILD");
@@ -167,6 +167,8 @@ public class ID3PresenterImpl implements ID3Presenter {
             public void onSuccess(String s) {
                 String yes = "Based on DT this data's points to a fraud, please take care!";
                 String no = "Based on DT this data's does not points to a fraud!";
+                if(s == null)
+                    showCustomDialog("This data's are not testable on this Decision Tree. Please try another approach!").show();
                 showCustomDialog(s.equals("Y") ? yes : no).show();
             }
         });

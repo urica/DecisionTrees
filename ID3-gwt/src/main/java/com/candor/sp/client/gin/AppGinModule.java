@@ -4,7 +4,6 @@
 package com.candor.sp.client.gin;
 
 import com.candor.sp.client.AppFrame;
-import com.candor.sp.client.DataManager;
 import com.candor.sp.client.i18n.I18nConstants;
 import com.candor.sp.client.i18n.I18nLookupConstants;
 import com.candor.sp.client.i18n.I18nMessages;
@@ -50,8 +49,6 @@ public class AppGinModule extends AbstractGinModule {
 		/* bind framework as {@link Singleton} */
 		bind(AppFrame.class).in(Singleton.class);
 
-		/* bind {@link DataManager} as {@link Singleton} */
-		bind(DataManager.class).in(Singleton.class);
 	}
 
 }

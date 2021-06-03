@@ -10,7 +10,7 @@ public interface RpcServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see com.candor.sp.client.rpc.RpcService
      */
-    void myMethod( java.lang.String s, AsyncCallback<java.lang.String> callback );
+    void createTree( java.lang.String s, AsyncCallback<java.lang.String> callback );
 
 
     /**

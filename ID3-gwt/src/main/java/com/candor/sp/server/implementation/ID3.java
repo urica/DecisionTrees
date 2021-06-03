@@ -23,32 +23,49 @@ public class ID3 {
     private String decisionColumn = "Fraud_reported";
     private boolean withGainRatio = true;
     private int correct_predictions = 0;
+    private int total_predictions = 0;
     private TreeNode DT = null;
 
     private List<DataFraud> testData = new ArrayList<>();
     private int amIntrat = 0;
     private String result = null;
+    boolean fistTime = true;
+
+    private void resetValues() {
+        DT = null;
+        total_predictions = 0;
+        correct_predictions = 0;
+        dataSetCols = new ArrayList<>();
+    }
 
     public String createTree(String gainType) throws IOException {
+
         if (gainType.equals(GainType.GAIN_RATIO.getValue()))
             withGainRatio = true;
         else
             withGainRatio = false;
-
-        setList();
-        setTestData();
+        resetValues();
+        if (fistTime) {
+            setList();
+            setTestData();
+            fistTime = false;
+        }
 
         dataSetCols = Arrays.stream(DataFraud.class.getMethods()).filter(f -> f.getName().contains("set")).map(m -> m.getName().replace("set", "")).sorted().collect(Collectors.toList());
         dataSetCols.remove(decisionColumn);
         String rootAttr = getRootNode(dataSet, decisionColumn, dataSetCols, withGainRatio);
-//        dataSetCols.remove(rootAttr);
         DT = new TreeNode(new Attribute(rootAttr, getAttrValues(dataSet, rootAttr)));
 
         computeTree(dataSet, DT, dataSetCols, withGainRatio);
 
-//        testData.forEach(test -> {
-//            testIfISFraud(test, DT);
-//        });
+        testData.forEach(test -> {
+            testIfISFraud(test, DT);
+        });
+        System.out.println("TOTAL PREDITCTION: " + total_predictions);
+        System.out.println("CORRECT PREDICTION: " + correct_predictions);
+        System.out.println("Total size of testing data set: " + testData.size());
+        System.out.println("Acuracy: " + (correct_predictions * 100) / testData.size());
+        System.out.println("real Acuracy: " + (correct_predictions * 100) / total_predictions);
 
         return p.getJSON(DT);
     }
@@ -63,10 +80,11 @@ public class ID3 {
                 String value = testData.getValueByColName(tree.getAttribute().getName());
                 testIfISFraud(testData, tree.getChildren().get(value));
             } else {
+                total_predictions++;
                 result = tree.getTargetLabel();
-//                if (testData.getFraud_reported().equals(tree.getTargetLabel())) {
-//                    correct_predictions++;
-//                }
+                if (testData.getFraud_reported().equals(tree.getTargetLabel())) {
+                    correct_predictions++;
+                }
             }
         });
         return result;
@@ -211,7 +229,7 @@ public class ID3 {
 
     private void setList() throws IOException {
         // create a reader
-        Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/com/candor/sp/data/myDataSet.csv"));
+        Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/com/candor/sp/data/myDataSetNEW.csv"));
 
         // create csv bean reader
         CsvToBean csvToBean = new CsvToBeanBuilder(reader)
@@ -224,7 +242,7 @@ public class ID3 {
 
     private void setTestData() throws IOException {
         // create a reader
-        Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/com/candor/sp/data/testData.csv"));
+        Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/com/candor/sp/data/testDataNEW.csv"));
 
         // create csv bean reader
         CsvToBean csvToBean = new CsvToBeanBuilder(reader)

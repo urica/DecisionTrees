@@ -4,7 +4,6 @@
 package com.candor.sp.client.gin;
 
 import com.candor.sp.client.AppFrame;
-import com.candor.sp.client.DataManager;
 import com.candor.sp.client.i18n.I18nConstants;
 import com.candor.sp.client.i18n.I18nLookupConstants;
 import com.candor.sp.client.i18n.I18nMessages;
@@ -42,6 +41,4 @@ public interface AppGinjector extends Ginjector {
 	// framework
 	AppFrame getAppFrame();
 
-	// data manager
-	DataManager getDataManager();
 }

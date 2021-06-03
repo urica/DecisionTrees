@@ -18,7 +18,7 @@ public class RpcServiceImpl extends RemoteServiceServlet implements RpcService {
     private ID3 id3 = new ID3();
 
     @Override
-    public String myMethod(String s) {
+    public String createTree(String s) {
         try {
             return id3.createTree(s);
         } catch (IOException e) {

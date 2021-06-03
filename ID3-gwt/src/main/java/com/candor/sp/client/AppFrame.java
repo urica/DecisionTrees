@@ -46,9 +46,6 @@ public class AppFrame extends ResizeComposite {
 	 * Do binding.
 	 */
 	public void bind() {
-		// handle bus events
-		addEventBusHandlers();
-
 		// add {@link History} events handler
 		History.addValueChangeHandler(event -> onHistoryEvent(event));
 
@@ -87,17 +84,6 @@ public class AppFrame extends ResizeComposite {
 		else if (!History.getToken().isEmpty()) {
 			context.setWidget(new HTML("<h2 style='text-align: center;'>" + AppGinjector.INSTANCE.getConstants().resourceNotAvailable() + "</h2>"));
 		}
-	}
-
-	/**
-	 * Register handlers on the BUS
-	 */
-	private void addEventBusHandlers() {
-
-//		AppGinjector.INSTANCE.getEventBus().addHandlerToSource(ViewPlacesMapEvent.TYPE, PlacesView.class, event -> {
-//			// show {@link PlacesMapView]
-//		});
-
 	}
 
 }

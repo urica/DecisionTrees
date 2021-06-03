@@ -13,7 +13,7 @@ import java.util.List;
  */
 @RemoteServiceRelativePath("rpc")
 public interface RpcService extends RemoteService {
-    public String myMethod(String s);
+    public String createTree(String s);
 
     public List<String> getAllColumnNames();
 
