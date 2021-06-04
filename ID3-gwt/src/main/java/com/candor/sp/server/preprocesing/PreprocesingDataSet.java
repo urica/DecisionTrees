@@ -24,7 +24,7 @@ public class PreprocesingDataSet {
 
         try {
             // create a reader
-            Reader reader = Files.newBufferedReader(Paths.get("ID3-gwt/src/main/resources/com/candor/sp/data/insurance_claims.csv"));
+            Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/com/candor/sp/data/insurance_claims.csv"));
 
             // create csv bean reader
             CsvToBean csvToBean = new CsvToBeanBuilder(reader)

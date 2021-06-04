@@ -8,37 +8,6 @@ import java.util.HashMap;
 
 public class PrintTree {
 
-    /**
-     * This method print out each path of the tree from root to leaf.
-     *
-     * @param root
-     * @return ArrayList<String>
-     */
-    public ArrayList<String> printDFS(TreeNode root) {
-        ArrayList<String> res = new ArrayList<String>();
-        printDFS(root, new StringBuilder(), res);
-        return res;
-    }
-
-    private void printDFS(TreeNode root, StringBuilder sb, ArrayList<String> res) {
-        if (root.getType().equals("leaf")) {
-            StringBuilder curr = new StringBuilder(sb);
-            curr.append(root.getTargetLabel());
-            curr.append("\n");
-            res.add(curr.toString());
-        } else {
-            sb.append(root.getAttribute().getName());
-            HashMap<String, TreeNode> children = root.getChildren();
-            for (String valueName : children.keySet()) {
-                StringBuilder curr = new StringBuilder(sb);
-                curr.append("(");
-                curr.append(valueName);
-                curr.append(")");
-                printDFS(children.get(valueName), curr, res);
-            }
-        }
-    }
-
     public String getJSON(TreeNode root) {
         JsonObject jsonRoot = new JsonObject();
         ArrayList<JsonObject> res = new ArrayList<>();

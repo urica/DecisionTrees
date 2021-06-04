@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 public class ID3 {
     final double LOG2 = Math.log(2.0);
+    boolean fistTime = true;
     private DecimalFormat df2 = new DecimalFormat("#.###");
     private List<DataFraud> dataSet = new ArrayList<>();
     private List<String> dataSetCols = new ArrayList<>();
@@ -25,11 +26,9 @@ public class ID3 {
     private int correct_predictions = 0;
     private int total_predictions = 0;
     private TreeNode DT = null;
-
     private List<DataFraud> testData = new ArrayList<>();
     private int amIntrat = 0;
     private String result = null;
-    boolean fistTime = true;
 
     private void resetValues() {
         DT = null;
@@ -104,16 +103,12 @@ public class ID3 {
 
                 rootNode.addChild(subset, leaf);
             } else {
-                try {
-                    TreeNode root = new TreeNode(new Attribute(rootNodeName, getAttrValues(ds, rootNodeName)));
-                    rootNode.addChild(subset, root);
-                    List<String> cols = new ArrayList<>();
-                    cols.addAll(columns);
-                    cols.remove(rootNode.getAttribute().getName());
-                    computeTree(ss, root, cols, withGainRatio);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                TreeNode root = new TreeNode(new Attribute(rootNodeName, getAttrValues(ds, rootNodeName)));
+                rootNode.addChild(subset, root);
+                List<String> cols = new ArrayList<>();
+                cols.addAll(columns);
+                cols.remove(rootNode.getAttribute().getName());
+                computeTree(ss, root, cols, withGainRatio);
             }
         });
     }

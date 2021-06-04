@@ -36,18 +36,10 @@ public class TreeNode {
 		return targetLabel;
 	}
 	
-	public void setTargetLabel(String targetLabel) {
-		this.targetLabel = targetLabel;
-	}
-	
 	public String getType() {
 		return type;
 	}
 	
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	@Override
 	public String toString() {
 		if (type.equals("root")) return "Root attribute: " + attribute.getName() + "; Children: " + children;
