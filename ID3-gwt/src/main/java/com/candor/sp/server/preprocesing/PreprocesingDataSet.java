@@ -307,9 +307,9 @@ public class PreprocesingDataSet {
             // create a write
             Writer writer = null;
             if (isTraining)
-                writer = Files.newBufferedWriter(Paths.get("ID3-gwt/src/main/resources/com/candor/sp/data/myDataSetNEW.csv"));
+                writer = Files.newBufferedWriter(Paths.get("src/main/resources/com/candor/sp/data/myDataSetNEW.csv"));
             else
-                writer = Files.newBufferedWriter(Paths.get("ID3-gwt/src/main/resources/com/candor/sp/data/testDataNEW.csv"));
+                writer = Files.newBufferedWriter(Paths.get("src/main/resources/com/candor/sp/data/testDataNEW.csv"));
 
 
             // create a csv writer

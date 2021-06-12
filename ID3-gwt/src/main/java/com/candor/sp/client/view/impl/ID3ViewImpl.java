@@ -33,10 +33,7 @@ import java.util.stream.Collectors;
 public class ID3ViewImpl extends Composite implements ID3View {
 
     private static final ID3ViewImplUiBinder uiBinder = GWT.create(ID3ViewImplUiBinder.class);
-    //create a file upload widget
-    final FileUpload fileUpload = new FileUpload();
-    //create a FormPanel
-    final FormPanel form = new FormPanel();
+
     @UiField
     protected HTMLElement treeElement;
     @UiField
@@ -63,6 +60,10 @@ public class ID3ViewImpl extends Composite implements ID3View {
 
     private void createUploadForm() {
         VerticalPanel panel = new VerticalPanel();
+        //create a file upload widget
+        FileUpload fileUpload = new FileUpload();
+        //create a FormPanel
+        FormPanel form = new FormPanel();
 
         //create labels
         Label selectLabel = new Label("Select a file:");
@@ -128,7 +129,8 @@ public class ID3ViewImpl extends Composite implements ID3View {
 
     public void createTree(String tree) {
         clearTree();
-        JSONObject root = (JSONObject) JSONParser.parseStrict(tree);
+//        JSONObject root = (JSONObject) JSONParser.parseStrict(tree);
+        JSONObject root = Js.uncheckedCast(JSONParser.parseStrict(tree));
         this.getElement().getStyle().setOverflow(Style.Overflow.AUTO);
 
         TreeNode node = new TreeNode();

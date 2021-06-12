@@ -2,6 +2,7 @@ package com.candor.sp.server.implementation;
 
 import com.candor.sp.shared.DataFraud;
 import com.candor.sp.shared.GainType;
+import com.github.habernal.confusionmatrix.ConfusionMatrix;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -25,6 +26,10 @@ public class ID3 {
     private boolean withGainRatio = true;
     private int correct_predictions = 0;
     private int total_predictions = 0;
+    private int correct_y_prediction = 0;
+    private int correct_n_prediction = 0;
+    private int bad_y_prediction = 0;
+    private int bad_n_prediction = 0;
     private TreeNode DT = null;
     private List<DataFraud> testData = new ArrayList<>();
     private int amIntrat = 0;
@@ -34,6 +39,10 @@ public class ID3 {
         DT = null;
         total_predictions = 0;
         correct_predictions = 0;
+        correct_y_prediction = 0;
+        correct_n_prediction = 0;
+        bad_y_prediction = 0;
+        bad_n_prediction = 0;
         dataSetCols = new ArrayList<>();
     }
 
@@ -66,6 +75,28 @@ public class ID3 {
         System.out.println("Acuracy: " + (correct_predictions * 100) / testData.size());
         System.out.println("real Acuracy: " + (correct_predictions * 100) / total_predictions);
 
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Results for confucius matrix:");
+        System.out.println("Correct Y = " + correct_y_prediction);
+        System.out.println("Correct N = " + correct_n_prediction);
+        System.out.println("Bad Y = " + bad_y_prediction);
+        System.out.println("BAD N = " + bad_n_prediction);
+
+        ConfusionMatrix confusionMatrix = new ConfusionMatrix();
+        confusionMatrix.increaseValue("neg", "neg", bad_n_prediction);
+        confusionMatrix.increaseValue("neg", "pos", bad_y_prediction);
+        confusionMatrix.increaseValue("pos", "neg", correct_n_prediction);
+        confusionMatrix.increaseValue("pos", "pos", correct_y_prediction);
+
+        System.out.println("confusionMatrix");
+        System.out.println("3. " + confusionMatrix.printClassDistributionGold());
+        System.out.println("4. " + confusionMatrix.printLabelPrecRecFm());
+        System.out.println("precision:" + confusionMatrix.getAvgPrecision());
+        System.out.println("recall:" + confusionMatrix.getAvgRecall());
+        System.out.println("acuracy:" + confusionMatrix.getAccuracy());
+        System.out.println("precision:" + confusionMatrix.getMacroFMeasure());
+
+        System.out.println(confusionMatrix.toString());
         return p.getJSON(DT);
     }
 
@@ -81,8 +112,18 @@ public class ID3 {
             } else {
                 total_predictions++;
                 result = tree.getTargetLabel();
+
                 if (testData.getFraud_reported().equals(tree.getTargetLabel())) {
+                    if (testData.getFraud_reported().equals("Y"))
+                        correct_y_prediction++;
+                    else
+                        correct_n_prediction++;
                     correct_predictions++;
+                } else {
+                    if (testData.getFraud_reported().equals("Y"))
+                        bad_y_prediction++;
+                    else
+                        bad_n_prediction++;
                 }
             }
         });
@@ -95,11 +136,13 @@ public class ID3 {
             String rootNodeName = getRootNode(ss, rootNode.getAttribute().getName(), columns, withGainRatio);
             if (rootNodeName.isEmpty()) {
                 double pos = ss.stream().filter(data -> data.getFraud_reported().equals("Y")).count();
+                double neg = ss.stream().filter(data -> data.getFraud_reported().equals("N")).count();
                 TreeNode leaf = null;
-                if (pos > 0)
+                if (pos > neg) {
                     leaf = new TreeNode("Y");
-                else
+                } else {
                     leaf = new TreeNode("N");
+                }
 
                 rootNode.addChild(subset, leaf);
             } else {
@@ -131,13 +174,20 @@ public class ID3 {
         double dataSetEntropy = dataSetEntropy(ds);
         allColumns.forEach(col -> {
             if (withGainRatio) {
-                double gainRatio = getGAIN(ds, col, dataSetEntropy) / calculateSplitInformation(ds, col);
-                ig.put(gainRatio, col);
+                double gain = getGAIN(ds, col, dataSetEntropy);
+                double split = calculateSplitInformation(ds, col);
+                double gainRatio = gain / split;
+                ig.put(Double.isNaN(gainRatio) ? 0 : gainRatio, col);
             } else
                 ig.put(getGAIN(ds, col, dataSetEntropy), col);
         });
 
-        double maxIG = ig.keySet().stream().mapToDouble(v -> v).max().orElse(0);
+        double maxIG;
+
+        if (withGainRatio) {
+            maxIG = ig.keySet().stream().filter(el -> el != 0).mapToDouble(v -> v).min().orElse(0);
+        } else
+            maxIG = ig.keySet().stream().filter(el -> el != 0).mapToDouble(v -> v).max().orElse(0);
 
         return maxIG == 0 ? "" : ig.get(maxIG);
     }
@@ -182,7 +232,7 @@ public class ID3 {
         double part1 = pos == 0 ? 0 : (-pos / total) * Math.log(pozVal) / LOG2;
         double part2 = neg == 0 ? 0 : (negVal) * Math.log(negVal) / LOG2;
 
-        return pozVal == 0 || negVal == 0 ? 0 : Double.valueOf(df2.format((part1 - part2)));
+        return Double.valueOf(df2.format((part1 - part2)));
     }
 
     private double calculateSplitInformation(List<DataFraud> ds, String col) {
@@ -197,7 +247,7 @@ public class ID3 {
         });
         AtomicReference<Double> result = new AtomicReference<>((double) 0);
         list.forEach(el -> {
-            result.set(result.get() - getEntropySplitInformation(el.getPoz(), el.getNeg(), ds.size()));
+            result.set(result.get() + getEntropySplitInformation(el.getPoz(), el.getNeg(), ds.size()));
         });
         return Double.valueOf(result.get());
     }
@@ -205,7 +255,7 @@ public class ID3 {
     public double getEntropySplitInformation(double poz, double neg, double allDataset) {
         double total = poz + neg;
         double totalVal = (total / allDataset);
-        double part1 = total == 0 ? 0 : totalVal * Math.log(totalVal) / LOG2;
+        double part1 = (total == 0) ? 0 : totalVal * Math.log(totalVal) / LOG2;
         return Double.valueOf(df2.format(part1));
     }
 

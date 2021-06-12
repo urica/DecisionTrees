@@ -116,6 +116,12 @@
 	<set-property name="gwt.logging.simpleRemoteHandler"
 		value="DISABLED" />
 
+	<!-- Specify the path to any remote services. -->
+	<servlet path="/ID3/rpc"
+			 class="com.candor.sp.server.rpc.RpcServiceImpl" />
+	<servlet path="/rf"
+			 class="com.google.web.bindery.requestfactory.server.RequestFactoryServlet" />
+
 	<!-- end Logger Settings -->
 
 	<!-- Enable JavaScript Source Maps -->
