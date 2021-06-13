@@ -1,0 +1,177 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style>
+        .body {
+        font-family: Arial;
+        color: white;
+        }
+        /* Split the screen in half */
+        .split {
+        height: 100%;
+        width: 50%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: auto;
+        padding-top: 20px;
+        }
+
+        /* Split the screen in half */
+        .split-vertical {
+        height: 50%;
+        width: 50%;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        overflow-x: auto;
+        }
+
+        /* Control the left side */
+        .left {
+        left: 0;
+        background-color: #bdcebe;
+        }
+
+        /* Control the right side */
+        .right {
+        right: 0;
+        }
+
+        /* Control the right side */
+        .top {
+        top: 0;
+        height: 25%;
+        }
+
+        /* Control the right side */
+        .bottom {
+        bottom: 0;
+        background-color: aliceblue;
+        height: 75%;
+        }
+
+
+        /* If you want the content centered horizontally and vertically */
+        .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        }
+
+
+        /* Style the image inside the centered container, if needed */
+        .centered img {
+        width: 150px;
+        border-radius: 50%;
+        }
+
+        .tree-position{
+        margin-top: 3%;
+        }
+
+        .tree-label{
+        margin-left: 2%;
+        font-size: xx-large;
+        font-family: monospace;
+        }
+
+        .paper-button {
+        border-style: outset;
+        position: absolute;
+        bottom: 10px;
+        width: 20%;
+        margin: 20px;
+        }
+        .paper-button:hover {
+        background-color: #97a498;
+        }
+        .paper-button:active {
+        background-color: #97a498;
+        border-style: insert !important;
+        }
+
+        .paper-button1 {
+        border-style: outset;
+        bottom: 10px;
+        width: 20%;
+        margin: 20px;
+        }
+        .paper-button1:hover {
+        background-color: #97a498;
+        }
+        .paper-button1:active {
+        background-color: #97a498;
+        border-style: insert !important;
+        }
+
+        .id3-paper-input{
+        width:40% !important;
+        margin: 20px;
+        }
+
+        .fu-style{
+        border-style: solid;
+        border-block-color: grey;
+        margin: 20px;
+        }
+
+        .grid-style{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin:20px;
+        }
+
+        .center-style{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 20%;
+        }
+
+    </ui:style>
+    <g:HTMLPanel styleName="idf-slot idf-integration-view">
+        <div class="{style.split} {style.left} idf-row">
+
+            <div class="{style.split-vertical} {style.top}">
+                <h2 class="{style.center-style}">Configuration
+                </h2>
+                <div style="display: flex">
+                    <vaadin-combo-box class="idf-input {style.id3-paper-input}"
+                                      label="Gain type"
+                                      ui:field="id3type"
+                                      item-label-path="string"
+                                      allaw-custom-value="true"/>
+                    <div ui:field="fileUpl" class="{style.fu-style}"></div>
+                    <div></div>
+
+                    <paper-button noink="true" class="{style.paper-button}" ui:field="createTree">
+                        <div>Create Tree</div>
+                    </paper-button>
+                </div>
+
+            </div>
+
+            <div class="{style.split-vertical} {style.bottom}">
+                <h2 class="{style.center-style}">Test your data</h2>
+                <div ui:field="fields" class="{style.grid-style}"></div>
+
+                <paper-button noink="true" class="{style.paper-button1}" ui:field="testData">
+                    <div>Test Data</div>
+                </paper-button>
+            </div>
+        </div>
+
+        <div class="{style.split} {style.right} idf-row">
+            <h2 class="{style.tree-label}">Decision tree</h2>
+            <div></div>
+            <div class="{style.tree-position}">
+                <div class="idf-tree-item" style="margin-left: 3%; overflow:auto;" ui:field="treeElement"></div>
+            </div>
+        </div>
+
+    </g:HTMLPanel>
+</ui:UiBinder> 

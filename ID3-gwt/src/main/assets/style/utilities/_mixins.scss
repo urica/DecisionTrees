@@ -1,0 +1,153 @@
+@mixin bodytext() {
+    font-family: "open sans", "Helvetica Neue", sans-serif;
+    font-size: .8rem;
+    color:$bodytext;
+    line-height:1;
+}
+@mixin boldtext() {
+    font-size: .8rem;
+    font-weight: $bold;
+    letter-spacing: .02rem;
+    line-height:1;
+}
+@mixin bigboldtext() {
+  line-height:1;
+  font-size: 1rem;
+  font-weight: $bold;
+  letter-spacing: .02rem;
+  color: $darkblue;
+}
+@mixin allcapslabel() {
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .035rem;
+    text-transform: uppercase;
+    line-height:1;
+}
+
+@mixin btn-medium-light(){
+  font-family: "open sans", "Helvetica Neue", sans-serif;
+  font-size: .8rem;
+  font-weight: 500;
+  border:1px solid $lightblue;
+  background-color: white;
+  padding: 0.6rem 1.3rem;
+  color:$darkblue;
+  line-height: 1;
+  transition: all .2s ease;
+  &:hover{
+    opacity: .7;
+  }
+  &:focus{
+    outline: none;
+  }
+}
+@mixin btn-samll-dark(){
+  font-family: "open sans", "Helvetica Neue", sans-serif;
+  @include allcapslabel();
+  border:1px solid $lightblue;
+  background-color: $lightblue;
+  padding: 0.4rem 1rem;
+  color:white;
+  transition: all .2s ease;
+  &:hover{
+    border:1px solid $darkblue;
+  background-color: $darkblue;
+  }
+  &:focus{
+    outline: none;
+  }
+}
+
+//helpers
+
+@mixin reset-list($display) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li{
+    display: $display;
+  }
+}
+
+@mixin box-sizing{
+  box-sizing: border-box;
+  * {
+    box-sizing: border-box;
+  }
+}
+
+//Interactions
+@mixin i-scale{
+  transform:scale(1);
+  transition: all .25s ease, transform $ease 200ms;
+  cursor: pointer;
+  &:hover{
+      transform:scale(1.2);
+  }
+  &:active{
+      transform:scale(1)!important;
+  }
+  &:focus{
+    outline: none
+  }
+}
+
+
+//responsive
+@mixin sm {
+  @media (max-width: 1200px) {
+      @content;
+  }
+}
+@mixin md {
+  @media (max-width: 1500px) {
+      @content;
+  }
+}
+@mixin lg {
+  @media (min-width: 1700px) {
+      @content;
+  }
+}
+
+@mixin ie {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { 
+      @content;
+  }
+}
+
+//table filters
+@mixin filterVisible ($before: 153px, $after: 226px){
+  &.idf-filters-visible{
+    height:calc(100% - #{$before});
+    @media only screen and (max-width: 1270px) {
+        height:calc(100% - #{$after});
+    }
+  }
+}
+
+@mixin equilateral-triangle($direction, $size, $color) {
+  width: 0;
+  height: 0;
+  @if $direction == 'up' {
+      border-left: $size solid transparent;
+      border-right: $size solid transparent;
+      border-bottom: $size solid $color;
+  }
+  @else if $direction == 'down' {
+      border-left: $size solid transparent;
+      border-right: $size solid transparent;
+      border-top: $size solid $color;
+  }
+  @else if $direction == 'right' {
+      border-top: $size solid transparent;
+      border-bottom: $size solid transparent;
+      border-left: $size solid $color;
+  }
+  @else if $direction == 'left' {
+      border-top: $size solid transparent;
+      border-bottom: $size solid transparent;
+      border-right: $size solid $color;
+  }
+}

@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <custom-style>
+        <style is="custom-style">
+            .idf-tabs-menu {
+                --paper-tab-content: {
+                    opacity: 1 !important;
+                    font-weight: 600 !important;
+                    font-size: .8rem;
+                    letter-spacing: .02rem;
+                    color: #2f4050;
+                }
+            }
+
+            .not-visible {
+                --paper-icon-button:{
+                    display: none;
+                }
+            }
+            .idf-toast {
+                --paper-toast-background-color: #425a70;
+                --paper-toast-color: #fafafa;
+                max-width: 600px!important;
+                z-index:1000;
+            }
+
+            .idf-timeline-tools vaadin-date-picker  [part="text-field"] {
+                font-size:12.5px
+            }
+
+            .idf-spinner {
+                --paper-spinner-stroke-width: 5px;
+                --paper-spinner-layer-1-color: #BFCDD9;
+                --paper-spinner-layer-2-color: #0878CF;
+                --paper-spinner-layer-3-color: #425A70;
+                --paper-spinner-layer-4-color: #2F4050;
+                --paper-spinner-layer-5-color: #2F4050;
+            }
+
+            .idf-help-icon{
+                --paper-fab-background:#425A70;
+                --paper-fab-keyboard-focus-background:#2F4050;
+                width: 35px;
+                height: 35px;
+                padding: 7px;
+                box-shadow: none!important;
+                position: fixed!important;
+                right: 15px;
+                bottom: 15px;
+                --paper-fab-label:{
+                    font-size:16px;
+                }
+            }
+
+            .idf-search-bar paper-dropdown-menu{
+                --paper-input-container-underline: { display: none; height: 0;};
+                --paper-input-container-underline-focus: { display: none; };
+                --paper-input-container:{
+                    background-color:#DFE6EC;
+                    border-radius:3px;
+                    padding:1px;
+                    text-transform:uppercase;
+                };
+                --paper-input-container-shared-input-style: {
+                    text-transform: uppercase;
+                    vertical-align:middle;
+                    width:185px;
+                    padding: 0 0 0 4px;
+                };
+                --paper-menu-button: {
+                    padding: 3px;
+                }
+                --paper-input-container-input: {
+                    color: #0878CF;
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                    font-size: 11px;
+                    font-weight: 600;
+                    letter-spacing: .5px;
+                    text-transform: uppercase;
+                    line-height:26px;
+                    text-align:center;
+                };
+                /* no underline */
+                --paper-input-container-underline-focus: {
+                display: none;
+                };
+                --paper-input-container-underline: {
+                display: none;
+                };
+                --paper-input-container-label: {
+                display:none
+                }
+            }
+
+            .idf-search-wrapper paper-input {
+                /* Reset some defaults */
+                --paper-input-container: { padding: 0;};
+                --paper-input-container-underline: { display: none; height: 0;};
+                --paper-input-container-underline-focus: { display: none; };
+
+                /* New custom styles */
+                --paper-input-container-input: {
+                    box-sizing: border-box;
+                    font-size: inherit;
+                };
+                --paper-icon-button: {
+                    width: 38px;
+                    height: 38px;
+                }
+            }
+
+            .idf-view-mode .paper-icon-button{
+                --iron-icon-width:14px;
+                --iron-icon-height:14px;
+            }
+
+            .idf-advanced-filters paper-dropdown-menu{
+                --paper-input-container-underline: { display: none; height: 0;};
+                --paper-input-container-underline-focus: { display: none; };
+                --paper-menu-button: {
+                    background-color:white;
+                    padding:2px 5px;
+                    border-radius:2px;
+                }
+
+                --paper-input-container-shared-input-style: {
+                    vertical-align:middle;
+                    width:100%;
+                    padding:0 0 0 5px;
+                };
+                --paper-input-container:{
+                    padding:2px 5px;
+                };
+                --paper-input-container-input: {
+                    color: #425A70;
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                    font-size: 12.8px;
+                };
+            }
+            .idf-advanced-filters .idf-white-input {
+
+                --paper-input-container:{
+                    background-color:white;
+                    color: #2F4050;
+                    padding: 2px 5px;
+                    border-radius:3px;
+                }
+            }
+            .idf-search-input{
+                --paper-input-container: { padding: 0;};
+                --paper-input-container-underline: { display: none; height: 0;};
+                --paper-input-container-underline-focus: { display: none; };
+            }
+            .idf-state-list{
+                width:165px;
+            }
+            paper-input.idf-input, paper-textarea.idf-textarea{
+                box-sizing:border-box;
+                width: 100%;
+
+                --paper-input-container-underline: {
+                    display: none;
+                    height: 0;
+                };
+                --paper-input-container-underline-focus: {
+                    display: none;
+                };
+                --paper-font-caption_-_line-height: 14px;
+                --secondary-text-color:#676A6C;
+                --primary-color:#425A70;
+                --paper-input-container-invalid-color:#676A6C;
+                --paper-input-container: {
+                    padding: 0;
+                };
+                --primary-text-color:#2F4050;
+
+                --paper-input-container-input:{
+                    box-sizing:border-box;
+                    background:#F3F5F7!important;
+                    padding:9px 10px!important;
+                    width: 100%;
+                    border-radius: 3px!important;
+                    font-size: inherit;
+                    border:1px solid transparent;
+                };
+                --paper-input-container-shared-input-style:{
+                    width: 100%;
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                    font-size:.9rem;
+                    line-height:16px;
+                    font-weight:normal;
+                    color:#425A70;
+                    margin-bottom:0;
+                    background:transparent;
+                    border:none;
+                    box-shadow: none;
+                    background: transparent;
+                    height: auto;
+                }
+
+                --paper-input-container-label-floating: {
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                }
+
+                --paper-input-error: {
+                    font-family: -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+                    Cantarell, "Helvetica Neue", sans-serif;
+                    -webkit-backface-visibility: hidden;
+                    -webkit-font-smoothing: antialiased;
+                    opacity: 1;
+                    pointer-events: none;
+                    transition: all 0.1s ease 0.0s;
+                    font-size: 11px;
+                    font-weight: 400;
+                    letter-spacing: 0.9px;
+                    background: #AA2E2E;
+                    color: white!important;
+                    display: inline-block;
+                    padding: 5px 6px 5.4px 6.6px;
+                    border-radius: 3px;
+                    position: absolute;
+                    z-index: 999;
+                    bottom: 40px;
+                    left: 0!important;
+                    margin-bottom: 9px;
+                    right:auto!important;
+                    white-space: normal;
+                    text-transform: initial;
+                    font-style: normal;
+                }
+                --paper-input-container-input-invalid: {
+                        border:1px solid #AA2E2E
+                };
+                --paper-font-subhead_-_line-height: 20px;
+                --paper-font-caption_-_line-height: 14px;
+
+            }
+
+
+            paper-input.idf-input.idf-white{
+                box-sizing:border-box;
+                width: 100%;
+
+                --paper-input-container-underline: {
+                    display: none;
+                    height: 0;
+                };
+                --paper-input-container-underline-focus: {
+                    display: none;
+                };
+                --paper-font-caption_-_line-height: 14px;
+                --secondary-text-color:#676A6C;
+                --primary-color:#425A70;
+                --paper-input-container-invalid-color:#676A6C;
+                --paper-input-container: {
+                    padding: 0;
+                };
+                --primary-text-color:#2F4050;
+
+                --paper-input-container-input:{
+                    box-sizing:border-box;
+                    background:white;
+                    padding:9px 10px;
+                    width: 100%;
+                    border-radius: 3px;
+                    font-size: inherit;
+                    border:1px solid transparent;
+                };
+                --paper-input-container-shared-input-style:{
+                    width: 100%;
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                    font-size:.9rem;
+                    line-height:16px;
+                    font-weight:normal;
+                    color:#425A70;
+                    margin-bottom:0;
+                    background:transparent;
+                    border:none;
+                    box-shadow: none;
+                    background: transparent;
+                    height: auto;
+                }
+
+                --paper-input-container-label-floating: {
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                }
+
+                --paper-input-error: {
+                    font-family: -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+                    Cantarell, "Helvetica Neue", sans-serif;
+                    -webkit-backface-visibility: hidden;
+                    -webkit-font-smoothing: antialiased;
+                    opacity: 1;
+                    pointer-events: none;
+                    transition: all 0.1s ease 0.0s;
+                    font-size: 12px;
+                    font-weight: 400;
+                    letter-spacing: 0.9px;
+                    background: #AA2E2E;
+                    color: white!important;
+                    display: inline-block;
+                    padding: 5px 6px 5.4px 6.6px;
+                    border-radius: 3px;
+                    position: absolute;
+                    z-index: 999;
+                    bottom: 40px;
+                    left: 0!important;
+                    margin-bottom: 9px;
+                    right:auto!important;
+                    white-space: normal;
+                    text-transform: initial;
+                    font-style: normal;
+                }
+                --paper-input-container-input-invalid: {
+                        border:1px solid #AA2E2E
+                };
+                --paper-font-subhead_-_line-height: 20px;
+                --paper-font-caption_-_line-height: 14px;
+
+            }
+            
+
+            paper-dropdown-menu.idf-btn-menu {
+
+                --paper-input-container-shared-input-style: {
+                    width: 100%;
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                    font-size:.9rem;
+                    font-weight:normal;
+                    color:#0878cf!important;
+                    line-height:16px!important;
+                    margin-bottom:0;
+                    background:transparent;
+                    border:none;
+                    box-shadow: none;
+                    text-align:center;
+                    text-transform:uppercase;
+                }
+            }
+
+            paper-input.idf-input[focused], paper-textarea.idf-textarea[focused]{
+                width: 100%;
+                --paper-font-caption_-_line-height: 14px;
+
+                --paper-input-container-input:{
+                    box-sizing:border-box;
+                    background:#F3F5F7;
+                    padding:9px 10px;
+                    width: 100%;
+                    border-radius: 3px;
+                    font-size: inherit;
+                    border:1px solid #BFCDD9;
+                };
+                --paper-input-container-shared-input-style: {
+                    width: 100%;
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                    font-size:.9rem;
+                    font-weight:normal;
+                    colod:#425A70;
+                    line-height:16px;
+                    margin-bottom:0;
+                    background:transparent;
+                    border:none;
+                    box-shadow: none;
+                    background: transparent;
+                    margin-bottom: 0;
+                }
+                --paper-input-container-label-floating: {
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                }
+            }
+
+            paper-textarea.idf-textarea{
+                --iron-autogrow-textarea:{
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                    padding:10px;
+                    font-size:.9rem;
+                    color:#2F4050;
+                    box-sizing: border-box;
+                    resize:none;
+                    border:none;
+                    box-shadow: none;
+                    background: transparent;
+                }
+
+            }
+
+            paper-dropdown-menu.idf-select{
+                box-sizing:border-box;
+                display: block;
+                width: 100%;
+                --paper-input-container-underline: {
+                    display: none;
+                    height: 0;
+                };
+                --paper-input-container-underline-focus: {
+                    display: none;
+                };
+
+                --secondary-text-color:#676A6C;
+                --primary-color:#425A70;
+
+                --paper-input-container: {
+                    padding: 0;
+                };
+
+                --paper-input-container-shared-input-style:{
+                    box-sizing:border-box;
+                    background:#F3F5F7;
+                    padding:4px 10px;
+                    width: 100%;
+                    border-radius: 3px;
+                    font-size: inherit;
+                    border:1px solid transparent;
+                    --paper-font-subhead_-_font-family: "open sans", "Helvetica Neue", sans-serif;
+                    --paper-font-subhead_-_font-size:.9rem;
+                };
+
+                --paper-dropdown-menu-icon:{
+                    position: absolute;
+                    right: 8px;
+                    top: 5px;
+                    fill:#BFCDD9;
+                }
+
+                --paper-menu-button-content: {
+                    border-radius: 3px;
+                    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.31) 0px 0px 1px;
+                    --paper-font-subhead_-_font-family: "open sans", "Helvetica Neue", sans-serif;
+                    --paper-font-subhead_-_font-size:.9rem;
+
+                }
+            }
+
+            paper-dropdown-menu.idf-select[focused]{
+                display: block;
+                width: 100%;
+                --paper-input-container-shared-input-style:{
+                    box-sizing:border-box;
+                    background:#F3F5F7;
+                    padding:4px 10px;
+                    width: 100%;
+                    border-radius: 3px;
+                    font-size: inherit;
+                    border:1px solid #BFCDD9;
+                    --paper-font-subhead_-_font-family: "open sans", "Helvetica Neue", sans-serif;
+                    --paper-font-subhead_-_font-size:.9rem;
+                };
+            }
+
+            paper-checkbox.idf-checkbox{
+                --paper-checkbox-unchecked-background-color:#DFE6EC;
+                --paper-checkbox-unchecked-color:#DFE6EC;
+                --paper-checkbox-unchecked-ink-color: transparent;
+                --paper-checkbox-checked-color:#0878CF;
+                --paper-checkbox-checked-ink-color:transparent;
+                --paper-checkbox-size:16px;
+                font-family: "open sans", "Helvetica Neue", sans-serif;
+            }
+
+            vaadin-combo-box, multiselect-combo-box, vaadin-date-picker {
+                --lumo-font-size-s: 11px;
+                --lumo-font-size-m: 0.8rem;
+                --lumo-font-family: open sans;
+                --lumo-contrast-20pct: #BFCDD9;
+            }
+
+            paper-icon-button.idf-small {
+                width: 36px;
+                height: 36px;
+            }
+             paper-icon-button.idf-extra-small {
+                width: 32px;
+                height: 32px;
+            }
+            .idf-rule-builder header paper-icon-button{
+                --iron-icon-fill-color: white;
+            }
+
+            paper-input.idf-input{
+                position:relative
+            }
+
+            paper-input.idf-input:before {
+                content: "";
+                position: absolute;
+                width: 0;
+                height: 0;
+                border: 5px solid transparent;
+                border-top-color: #AA2E2E;
+                opacity: 0;
+                pointer-events: none;
+                bottom: 19px;
+                left: 7px;
+            }
+            paper-input.idf-input.idf-invalid:not([always-float-label="true"]):before {
+                opacity: 1;
+                bottom: 38px;
+            }
+
+             paper-input.idf-input[always-float-label="true"], paper-textarea.idf-textarea[always-float-label="true"]{
+                --paper-input-error: {
+                    font-family: -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+                    Cantarell, "Helvetica Neue", sans-serif;
+                    -webkit-backface-visibility: hidden;
+                    -webkit-font-smoothing: antialiased;
+                    opacity: 1;
+                    pointer-events: none;
+                    font-size: 11px;
+                    font-weight: 400;
+                    letter-spacing: 0.3px;
+                    color: #AA2E2E!important;
+                    display: inline-block;
+                    border-radius: 3px;
+                    white-space: normal;
+                    text-transform: initial;
+                    font-style: normal;
+                    margin-top: -2px;
+                }
+              }
+              paper-input-error{
+                  color:white!important;
+              }
+              .idf-readonly  paper-input.idf-input {
+                --paper-input-container-input:{
+                    box-sizing:border-box;
+                    background:#F3F5F7;
+                    padding:9px 10px;
+                    width: 100%;
+                    border-radius: 3px;
+                    font-size: inherit;
+                    border:1px solid transparent;
+                }
+              }
+
+              gold-phone-input{
+                width: 100%;
+                --paper-input-container-underline: {
+                    display: none;
+                    height: 0;
+                };
+                --paper-input-container-underline-focus: {
+                    display: none;
+                };
+                --paper-font-caption_-_line-height: 14px;
+                --secondary-text-color:#676A6C;
+                --primary-color:#425A70;
+                --paper-input-container-invalid-color:#676A6C;
+                --paper-input-container: {
+                    padding: 0;
+                };
+                --primary-text-color:#2F4050;
+                --paper-font-caption_-_line-height: 14px;
+
+                --gold-phone-input-country-code:{
+                    background-color:transparent;
+                    position:absolute;
+                    top:0;
+                    line-height:35px;
+                    color:#2F4050;
+                    z-index: 1;
+                    left:4px;
+                    opacity: .6;
+                    
+
+                }
+
+                --paper-input-container-input:{
+                    box-sizing:border-box;
+                    background:#F3F5F7;
+                    width: 100%;
+                    border-radius: 3px;
+                    font-size: .9rem;
+                    color:#425A70;
+                    line-height:16px;
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                    font-size:.9rem;
+                    font-weight:normal;
+                    --paper-font-subhead_-_font-family: "open sans", "Helvetica Neue", sans-serif;
+                    --paper-font-subhead_-_font-size:.9rem;
+                };
+                --paper-input-container-shared-input-style: {
+                    width: 100%;
+                    margin-bottom:0;
+                    padding:9px 10px 9px 33px;
+                    background:#F3F5F7;
+                    border:1px solid transparent;
+                    box-shadow: none;
+                    margin-bottom: 0;
+                    --paper-font-subhead_-_font-family: "open sans", "Helvetica Neue", sans-serif;
+                    --paper-font-subhead_-_font-size:.9rem;
+                }
+                --paper-input-container-label-floating: {
+                    font-family: "open sans", "Helvetica Neue", sans-serif;
+                }
+                --paper-input-error: {
+                    font-family: -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+                    Cantarell, "Helvetica Neue", sans-serif;
+                    -webkit-backface-visibility: hidden;
+                    -webkit-font-smoothing: antialiased;
+                    opacity: 1;
+                    pointer-events: none;
+                    font-size: 11px;
+                    font-weight: 400;
+                    letter-spacing: 0.3px;
+                    color: #AA2E2E!important;
+                    display: inline-block;
+                    border-radius: 3px;
+                    white-space: normal;
+                    text-transform: initial;
+                    font-style: normal;
+                    margin-top: -2px;
+                }
+              }
+              gold-phone-input[focused]{
+                outline:none;
+                --paper-input-container-shared-input-style: {
+                    width: 100%;
+                    margin-bottom:0;
+                    padding:9px 10px 9px 33px;
+                    background:#F3F5F7;
+                    border:1px solid #BFCDD9;
+                    box-shadow: none;
+                    margin-bottom: 0;
+                    --paper-font-subhead_-_font-family: "open sans", "Helvetica Neue", sans-serif;
+                    --paper-font-subhead_-_font-size:.9rem;
+                }
+              }
+        </style>
+    </custom-style>
+
+    <dom-module id="idf-custom-text-field" theme-for="vaadin-text-field">
+        <template>
+            <style>
+                :host{
+                    --lumo-contrast-10pct: #F3F5F7;
+                    --lumo-font-size-m: .8rem;
+                }
+                :host {
+                    position:relative
+                }
+                :host([focused]:not([readonly])) [part="label"]{
+                    color:#676A6C;
+                }
+                :host [part="label"]{
+                    color:#676A6C;
+                    font-weight: 400;
+                    padding-bottom: 2px;
+                    margin:0; 
+                }
+                :host([has-label]), :host{
+                    padding:0;
+                }
+                :host(:hover:not([readonly]):not([focused])) [part="label"] {
+                    color:#676A6C;
+                }
+
+                :host(:hover:not([readonly]):not([focused])) [part="input-field"]::after {
+                    opacity: 0;
+                }
+
+                :host(:hover:not([readonly]):not([focused])) [part="input-field"]::after {
+                    opacity: 0;
+                }
+
+                :host(:active:not([readonly]):not([focused])) [part="input-field"]::after {
+                    opacity: 0;
+                }
+                :host [part="input-field"], :host(.multiselect[focused]:not([readonly])) [part="input-field"]{
+                    border: 1px solid transparent;
+                }
+                :host([focused]:not([readonly])) [part="input-field"]{
+                    border: 1px solid #BFCDD9;
+                }
+                :host([invalid]) [part="input-field"] {
+                    background-color: var(--lumo-contrast-10pct);
+                    border-color: #AA2E2E;
+                }
+                :host(:not([invalid])) [part="error-message"] {
+                    bottom:calc(100% -10px);
+                    max-height: 20px;
+                    overflow: visible;
+                    opacity: 0;
+                }
+                :host [part="error-message"]{
+                    font-family: -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+                    Cantarell, "Helvetica Neue", sans-serif;
+                    -webkit-backface-visibility: hidden;
+                    -webkit-font-smoothing: antialiased;
+                    opacity: 1;
+                    pointer-events: none;
+                    transition: all 0.1s ease 0.0s;
+                    font-size: 11px;
+                    font-weight: 400;
+                    display: inline-block;
+                    color: #AA2E2E;
+                    border-radius: 3px;
+                    white-space: pre;
+                    text-transform: initial;
+                    font-style: normal;
+                    position:absolute;
+                        bottom: -17px;
+                }
+                :host(:not([has-label])) [part="error-message"]{
+                    bottom: 100%;
+                    left: 0;
+                    margin-bottom: 9px;
+                    z-index: 99;
+                     letter-spacing: 0.9px;
+                    background: #AA2E2E;
+                    color: white;
+                    padding: 5px 6px 5.4px 6.6px;
+                }
+                :host(:not([has-label])) [part="error-message"]::after{
+                    content: "";
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border: 5px solid transparent;
+                    border-top-color: #AA2E2E;
+                    opacity: 1;
+                    pointer-events: none;
+                    bottom: -10px;
+                    left:7px;
+                }
+                 :host [part="error-message"]::before{
+                    display:none;
+                 }
+                 :host([required]:not([has-value])) [part="label"]::after{
+                     opacity: 0!important;
+                 }  
+                 
+                :host([focus-ring]) [part="input-field"] {
+                    box-shadow: none!important;
+                }
+                [part="input-field"]{
+                    font-weight: 400;
+                }
+                :host([readonly]) [part="input-field"]::after {
+                    opacity: 1;
+                    border: none;
+                }
+                :host([readonly]) [part="input-field"] {
+                    background-color: var(--lumo-contrast-10pct);
+                    color: #425a70
+                }
+            </style>
+        </template>
+    </dom-module>
+    <dom-module id="idf-custom-combo-box" theme-for="vaadin-combo-box">
+        <template>
+            <style>
+                :host{
+                    --lumo-contrast-10pct: #F3F5F7;
+                    --lumo-font-size-m: .8rem;
+                }
+                :host(.idf-no-clear) [part="clear-button"] {
+                    display:none !important
+                }
+            </style>
+        </template>
+    </dom-module>
+    <dom-module id="idf-custom-combo-box-item" theme-for="vaadin-combo-box-item">
+        <template>
+            <style>
+                :host{
+                    --lumo-contrast-10pct: #F3F5F7;
+                    --lumo-font-size-m: .8rem;
+                }
+                :host{
+                    font-family: -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+                    Cantarell, "Helvetica Neue", sans-serif;
+                    -webkit-backface-visibility: hidden;
+                    font-size: .8rem;
+                    font-weight: 400;
+                    color: #2f4050!important;
+                }
+                [part="content"] {
+                    width:100%;
+                }
+            </style>
+        </template>
+    </dom-module>
+    <dom-module id="idf-custom-combo-box-item-overlay" theme-for="vaadin-combo-box-overlay">
+        <template>
+            <style>
+                :host{
+                    z-index: 1000;
+                }
+            </style>
+        </template>
+    </dom-module>
+    <dom-module id="idf-custom-combo-date-piker-overlay" theme-for="vaadin-date-picker-overlay">
+        <template>
+            <style>
+                :host{
+                    z-index: 1000;
+                    --lumo-font-size-s: .8rem;
+                }
+            </style>
+        </template>
+    </dom-module>
+    <dom-module id="idf-custom-multiselect-combo-box" theme-for="multiselect-combo-box">
+        <template>
+            <style>
+                :host{
+                    --lumo-contrast-10pct: #F3F5F7;
+                    --lumo-font-size-m: .8rem;
+                }
+                :host {
+                    padding:0px!important;
+                    position:relative;
+                 }
+                :host [part="combo-box"] {
+                    border-radius: var(--lumo-border-radius);
+                    border: 1px solid transparent;
+                }
+                :host([focused]) [part="combo-box"]{
+                    border:1px solid #BFCDD9;
+                }
+                :host([has-label]) {
+                    padding-top:0;
+                    max-height: initial;
+                 }
+                :host [part="label"]{
+                    color:#676A6C;
+                    font-weight: 400;
+                    padding-bottom: 2px;
+                    margin:0; 
+                }
+                :host(:hover:not([readonly]):not([focused]):not([disabled])) [part="label"]{
+                     color:#676A6C;
+                }
+                :host([focused]:not([readonly]):not([disabled])) [part="label"] {
+                    color:#676A6C;
+                }
+
+                :host(:hover:not([readonly]):not([focused])) [part="input-field"]::after {
+                    opacity: 0;
+                }
+
+                :host(:hover:not([readonly]):not([focused]):not([disabled])) [part="input-field"]::after {
+                    opacity: 0;
+                }
+
+                 :host([invalid]) [part="input-field"] {
+                    background-color: var(--lumo-contrast-10pct);
+                }
+                :host([invalid])  [part="combo-box"]{
+                    border:1px solid #AA2E2E;
+                }
+                :host(:not([invalid])) [part="error-message"] {
+                    bottom:calc(100% -10px);
+                    max-height: 20px;
+                    overflow: visible;
+                    opacity: 0;
+                }
+                :host [part="error-message"]{
+                    font-family: -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+                    Cantarell, "Helvetica Neue", sans-serif;
+                    -webkit-backface-visibility: hidden;
+                    -webkit-font-smoothing: antialiased;
+                    opacity: 1;
+                    pointer-events: none;
+                    transition: all 0.1s ease 0.0s;
+                    font-size: 11px;
+                    font-weight: 400;
+                    display: inline-block;
+                    color: #AA2E2E;
+                    border-radius: 3px;
+                    white-space: pre;
+                    text-transform: initial;
+                    font-style: normal;
+                    position:absolute;
+                        bottom: -19px;
+                }
+                :host(:not([has-label])) [part="error-message"]{
+                    bottom: 100%;
+                    left: 0;
+                    margin-bottom: 9px;
+                    z-index: 99;
+                     letter-spacing: 0.9px;
+                    background: #AA2E2E;
+                    color: white;
+                    padding: 5px 6px 5.4px 6.6px;
+                }
+                :host(:not([has-label])) [part="error-message"]::after{
+                    content: "";
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border: 5px solid transparent;
+                    border-top-color: #AA2E2E;
+                    opacity: 1;
+                    pointer-events: none;
+                    bottom: -10px;
+                    left:7px;
+                }
+                 :host [part="error-message"]::before{
+                    display:none;
+                 }
+                 :host([required]:not([has-value])) [part="label"]::after{
+                     opacity: 0!important;
+                 }
+                 :host [part="readonly-container"]{
+                     display: var( --idf-display-hidden);
+                     background-color:var(--lumo-contrast-10pct);
+                     border:none;
+                     color: var(--lumo-body-text-color);
+                 }
+                 :host [part="combo-box"]{
+                    display: var( --idf-display-block);
+                 }
+                 :host .multiselect-combo-box-container{
+                     margin:-1px
+                 }
+                 :host [part="combo-box"] paper-icon-button {
+                    position: absolute;
+                    bottom: 4px;
+                    right: 20px;
+                    width: 31px;
+                    height: 31px;
+                 }
+            </style>
+        </template>
+    </dom-module>
+    <dom-module id="idf-custom-multiselect-combo-box-input" theme-for="multiselect-combo-box-input">
+        <template>
+            <style>
+                :host{
+                    --lumo-contrast-10pct: #F3F5F7;
+                    --lumo-font-size-m: .8rem;
+                }
+                :host(:not([readonly])) [part$="button"]:hover {
+                    color: var(--lumo-contrast-90pct);
+                }
+                :host(:not([has-value])) [part="compact-mode-label"] {
+                    display:none;
+                }
+                [part="compact-mode-label"] {
+                    position: absolute;
+                    top: 10%;
+                }
+                [part="token-label"] {
+                    overflow: visible;
+                }
+                [part="token"] + [part="token"] {
+                    margin-left: var(--lumo-space-xs);
+                }
+                [part="token"] {
+                    margin-right:0!important;
+                }
+
+            </style>
+        </template>
+    </dom-module>
+</head>
+<body></body>
+</html>
