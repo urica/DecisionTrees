@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 public class ID3 {
     final double LOG2 = Math.log(2.0);
     boolean fistTime = true;
+    List<String> original_prediction = new ArrayList<>();
+    List<String> prediction = new ArrayList<>();
     private DecimalFormat df2 = new DecimalFormat("#.###");
     private List<DataFraud> dataSet = new ArrayList<>();
     private List<String> dataSetCols = new ArrayList<>();
@@ -43,6 +45,8 @@ public class ID3 {
         correct_n_prediction = 0;
         bad_y_prediction = 0;
         bad_n_prediction = 0;
+        original_prediction = new ArrayList<>();
+        prediction = new ArrayList<>();
         dataSetCols = new ArrayList<>();
     }
 
@@ -96,6 +100,9 @@ public class ID3 {
         System.out.println("acuracy:" + confusionMatrix.getAccuracy());
         System.out.println("precision:" + confusionMatrix.getMacroFMeasure());
 
+        System.out.println("Original = " + original_prediction);
+        System.out.println("Prediction = " + prediction);
+
         System.out.println(confusionMatrix.toString());
         return p.getJSON(DT);
     }
@@ -112,19 +119,20 @@ public class ID3 {
             } else {
                 total_predictions++;
                 result = tree.getTargetLabel();
-
-                if (testData.getFraud_reported().equals(tree.getTargetLabel())) {
-                    if (testData.getFraud_reported().equals("Y"))
-                        correct_y_prediction++;
-                    else
-                        correct_n_prediction++;
-                    correct_predictions++;
-                } else {
-                    if (testData.getFraud_reported().equals("Y"))
-                        bad_y_prediction++;
-                    else
-                        bad_n_prediction++;
-                }
+//                original_prediction.add(testData.getFraud_reported().equals("N") ? "1" : "0");
+                prediction.add(tree.getTargetLabel().equals("N") ? "1" : "0");
+//                if (testData.getFraud_reported().equals(tree.getTargetLabel())) {
+//                    if (testData.getFraud_reported().equals("Y"))
+//                        correct_y_prediction++;
+//                    else
+//                        correct_n_prediction++;
+//                    correct_predictions++;
+//                } else {
+//                    if (testData.getFraud_reported().equals("Y"))
+//                        bad_y_prediction++;
+//                    else
+//                        bad_n_prediction++;
+//                }
             }
         });
         return result;

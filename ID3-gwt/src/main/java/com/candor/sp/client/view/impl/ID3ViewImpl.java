@@ -10,6 +10,7 @@ import com.candor.sp.client.view.ID3View;
 import com.candor.sp.shared.DataFraud;
 import com.candor.sp.shared.GainType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
@@ -17,9 +18,12 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
+import com.vaadin.polymer.Polymer;
 import com.vaadin.polymer.paper.PaperButtonElement;
 import com.vaadin.polymer.vaadin.VaadinComboBoxElement;
+import com.vaadin.polymer.vaadin.VaadinUploadElement;
 import elemental2.core.JsArray;
+import elemental2.dom.File;
 import elemental2.dom.HTMLElement;
 import jsinterop.base.Js;
 
@@ -41,11 +45,13 @@ public class ID3ViewImpl extends Composite implements ID3View {
     @UiField
     protected PaperButtonElement createTree;
     @UiField
+    protected PaperButtonElement upload;
+    @UiField
     protected HTMLElement fileUpl;
     @UiField
     protected PaperButtonElement testData;
     @UiField
-    protected HTMLElement fields;
+    protected static HTMLElement fields;
     private ID3Presenter presenter;
 
     public ID3ViewImpl() {
@@ -55,45 +61,57 @@ public class ID3ViewImpl extends Composite implements ID3View {
         initComponents();
 
         addEventHandlers();
-        createUploadForm();
+//        createUploadForm();
+
+        vaadin_FU();
     }
 
-    private void createUploadForm() {
-        VerticalPanel panel = new VerticalPanel();
-        //create a file upload widget
-        FileUpload fileUpload = new FileUpload();
-        //create a FormPanel
-        FormPanel form = new FormPanel();
+    public static native void readTextFile(File file)
+    /*-{
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            @com.candor.sp.client.view.impl.ID3ViewImpl::fileLoaded(*)(reader.result);
+        }
+        return reader.readAsText(file);
+    }-*/;
 
-        //create labels
-        Label selectLabel = new Label("Select a file:");
-        //pass action to the form to point to service handling file
-        //receiving operation.
-        form.setAction("http://www.tutorialspoint.com/gwt/myFormHandler");
-        // set form to use the POST method, and multipart MIME encoding.
-        form.setEncoding(FormPanel.ENCODING_MULTIPART);
-        form.setMethod(FormPanel.METHOD_POST);
+    public static void fileLoaded(String fileContents) {
+        GWT.log("CONTENT: " + fileContents);
+        int i = 0;
+        String[] list = fileContents.split(",");
+        for (Element element : JQuery.$(fields).children().get()) {
+            VaadinComboBoxElement attr = Js.uncheckedCast(element);
+            attr.setSelectedItem(Js.uncheckedCast(list[i]));
+            i++;
+        }
+                GWT.log("fileContents.split(\",\") = " + fileContents.split(",").length);
+        Arrays.stream(fileContents.split(",")).forEach(el -> {
+            
+            //AGE,AUTHORITIES_CONTACTED,AUTO_MAKE,AUTO_YEAR,BODILY_INJURIES,CAPITAL_GAINS,CAPITAL_LOSS,COLLISION_TYPE,INCIDENT_SEVERITY,INCIDENT_TYPE,INJURY_CLAIM,INSURED_EDUCATION_LEVEL,INSURED_HOBBIES,INSURED_OCCUPATION,INSURED_RELATIONSHIP,INSURED_SEX,MONTHS_AS_CUSTOMER,NUMBER_OF_VEHICLES_INVOLVED,POLICE_REPORT_AVAILABLE,POLICY_ANNUAL_PREMIUM,POLICY_DEDUCTABLE,POLICY_STATE,PROPERTY_CLAIM,PROPERTY_DAMAGE,TOTAL_CLAIM_AMOUNT,UMBRELLA_LIMIT,VEHICLE_CLAIM,WITNESSES,FRAUD_REPORTED
 
-        //add a label
-        panel.add(selectLabel);
-        //add fileUpload widget
-        panel.add(fileUpload);
-
-        form.addSubmitCompleteHandler(new FormPanel.SubmitCompleteHandler() {
-            @Override
-            public void onSubmitComplete(FormPanel.SubmitCompleteEvent event) {
-                // When the form submission is successfully completed, this
-                //event is fired. Assuming the service returned a response
-                //of type text/html, we can get the result text here
-                Window.alert(event.getResults());
-            }
         });
 
-        panel.setSpacing(10);
+    }
 
-        // Add form to the root panel.
-        form.add(panel);
-        fileUpl.appendChild(Js.uncheckedCast(form.getElement()));
+    private void vaadin_FU() {
+        VaadinUploadElement element = Polymer.createElement(VaadinUploadElement.TAG);
+        element.addEventListener("upload-finished", evt -> {
+            GWT.log("Upload finish");
+        });
+        upload.addEventListener("click", evt -> {
+            GWT.log("Click");
+            GWT.log("FU: " + element.getFiles().length);
+            if (element.getFiles().length > 0) {
+                File[] file = Js.uncheckedCast(element.getFiles());
+                GWT.log("Size again: " + file.length);
+                GWT.log("FILE1: " + file[0].name);
+                GWT.log("F: " + file[0].slice().size);
+                GWT.log("Content: " + file[0].toString());
+                readTextFile(file[0]);
+            }
+        });
+        fileUpl.appendChild(element);
+
     }
 
     private void addEventHandlers() {

@@ -93,6 +93,22 @@
         border-style: insert !important;
         }
 
+        .paper-button5 {
+        border-style: outset;
+        position: absolute;
+        bottom: 10px;
+        right:25px;
+        width: 20%;
+        margin: 20px;
+        }
+        .paper-button5:hover {
+        background-color: #97a498;
+        }
+        .paper-button5:active {
+        background-color: #97a498;
+        border-style: insert !important;
+        }
+
         .paper-button1 {
         border-style: outset;
         bottom: 10px;
@@ -146,6 +162,9 @@
                                       item-label-path="string"
                                       allaw-custom-value="true"/>
                     <div ui:field="fileUpl" class="{style.fu-style}"></div>
+                    <paper-button noink="true" class="{style.paper-button5}" ui:field="upload">
+                        <div>Upload file</div>
+                    </paper-button>
                     <div></div>
 
                     <paper-button noink="true" class="{style.paper-button}" ui:field="createTree">
