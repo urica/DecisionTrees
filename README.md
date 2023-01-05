@@ -40,11 +40,11 @@ Fraud detection with the use of decision trees
 
 
 ## Clone and setup Licenta
-     git clone git@github.com:urica/Licenta.git
+     git clone git@github.com:urica/DecisionTrees.git
 
 
 ## Build id3-gwt
-1. Change to project folder `$ cd Licenta/ID3-gwt`
+1. Change to project folder `$ cd DecisionTrees/ID3-gwt`
 1. Run `$ ./start-dev-env.sh` to start gwt-codeserver
 1. Open `http://127.0.0.1:2021/id3.html` in your browser
 1. Enjoy!
